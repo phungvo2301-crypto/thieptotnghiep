@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   rsvp.addEventListener("submit",(e)=>{
     if(!prepareForm(rsvp)){
       e.preventDefault();
-      document.getElementById("rsvpStatus").textContent="Bạn chưa điền link Google Apps Script trong script.js.";
+      document.getElementById("rsvpStatus").textContent="https://script.google.com/macros/s/AKfycbyjgmY-9iS87bpf1YVAo-0gFsidwrAYVNlyYfCRvPpADpp8nRAUfK1cCQQm_JvYsBKl/exec";
       return;
     }
     document.getElementById("rsvpStatus").textContent="Đã gửi. Cảm ơn bạn đã xác nhận!";
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   wish.addEventListener("submit",(e)=>{
     if(!prepareForm(wish)){
       e.preventDefault();
-      document.getElementById("wishStatus").textContent="Bạn chưa điền link Google Apps Script trong script.js.";
+      document.getElementById("wishStatus").textContent="https://script.google.com/macros/s/AKfycbyjgmY-9iS87bpf1YVAo-0gFsidwrAYVNlyYfCRvPpADpp8nRAUfK1cCQQm_JvYsBKl/exec";
       return;
     }
     document.getElementById("wishStatus").textContent="Đã gửi lời chúc. Xin cảm ơn!";
