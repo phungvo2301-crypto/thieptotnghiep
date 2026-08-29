@@ -1,128 +1,67 @@
 // =============================
 // CHỈNH CẤU HÌNH Ở ĐÂY
 // =============================
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwBKc45ZsUpzRbsV9Fl-SCXmbGu2KoCjcMySn7XIbZ9MYKUoVxhLKhTyQqyDC1C1qv-/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyDF1sIZzd59zQuaCu8vWsNWTNHckwuVUkfbwXtIXXJbiJr1hYkaaWtNdGy4sFs7zp6/exec";
 
-// Thêm / sửa câu hỏi tại đây.
+// Thêm / sửa câu hỏi tại đây. Có thể để [] nếu chưa muốn hỏi.
 const QUESTIONS = [
-  // { id: "q1", text: "Bạn có tham gia được không?", placeholder: "Nhập câu trả lời..." },
-  // { id: "q2", text: "Bạn có để lại lời chúc nào không?", placeholder: "Nhập lời chúc..." }
+  // { id: "q1", text: "Bạn có yêu cầu đặc biệt nào về món ăn không?", placeholder: "Ví dụ: ăn chay, dị ứng..." },
+  // { id: "q2", text: "Bạn có cần hỗ trợ đưa đón không?", placeholder: "Nhập câu trả lời..." }
 ];
 
-function showSection(id) {
-  const el = document.getElementById(id);
-
-  if (el) {
+function showSection(id){
+  const el=document.getElementById(id);
+  if(el){
     el.classList.remove("hidden");
-
-    setTimeout(() => {
-      el.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    }, 30);
+    setTimeout(()=>el.scrollIntoView({behavior:"smooth",block:"start"}),30);
   }
 }
 
-function renderQuestions() {
-  const box = document.getElementById("questions");
-
-  if (!box) return;
-
-  box.innerHTML = "";
-
-  QUESTIONS.forEach((q, i) => {
-    const wrap = document.createElement("div");
-
-    wrap.className = "question";
-
-    wrap.innerHTML = `
-      <label>${i + 1}. ${escapeHtml(q.text)}</label>
-
-      <input
-        name="${escapeAttr(q.id)}"
-        placeholder="${escapeAttr(q.placeholder || "Nhập câu trả lời...")}"
-      >
-    `;
-
+function renderQuestions(){
+  const box=document.getElementById("questions");
+  if(!box) return;
+  box.innerHTML="";
+  QUESTIONS.forEach((q,i)=>{
+    const wrap=document.createElement("div");
+    wrap.className="question";
+    wrap.innerHTML=`<label>${i+1}. ${escapeHtml(q.text)}</label>
+      <input name="${escapeAttr(q.id)}" placeholder="${escapeAttr(q.placeholder||"Nhập câu trả lời...")}">`;
     box.appendChild(wrap);
   });
 }
 
-function escapeHtml(s) {
-  return String(s).replace(
-    /[&<>"']/g,
-    m => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;"
-    }[m])
-  );
-}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function escapeAttr(s){return escapeHtml(s)}
 
-function escapeAttr(s) {
-  return escapeHtml(s);
-}
-
-function prepareForm(form) {
-  if (!SCRIPT_URL) {
+function prepareForm(form){
+  // Nếu chưa cấu hình URL, không gửi nhầm dữ liệu.
+  if(!SCRIPT_URL || SCRIPT_URL.includes("DAN_LINK")){
     return false;
   }
-
-  form.action = SCRIPT_URL;
-  form.method = "POST";
-
+  form.action=SCRIPT_URL;
   return true;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-
+document.addEventListener("DOMContentLoaded",()=>{
   renderQuestions();
 
-  // =============================
-  // FORM XÁC NHẬN THAM DỰ
-  // =============================
-  const rsvp = document.getElementById("rsvpForm");
+  const rsvp=document.getElementById("rsvpForm");
+  rsvp.addEventListener("submit",(e)=>{
+    if(!prepareForm(rsvp)){
+      e.preventDefault();
+      document.getElementById("rsvpStatus").textContent="Bạn chưa điền link Google Apps Script trong script.js.";
+      return;
+    }
+    document.getElementById("rsvpStatus").textContent="Đã gửi. Cảm ơn bạn đã xác nhận!";
+  });
 
-  if (rsvp) {
-    rsvp.addEventListener("submit", (e) => {
-
-      if (!prepareForm(rsvp)) {
-        e.preventDefault();
-
-        document.getElementById("rsvpStatus").textContent =
-          "Chưa cấu hình Google Apps Script.";
-
-        return;
-      }
-
-      document.getElementById("rsvpStatus").textContent =
-        "Đã gửi. Cảm ơn bạn đã xác nhận!";
-    });
-  }
-
-  // =============================
-  // FORM LỜI CHÚC
-  // =============================
-  const wish = document.getElementById("wishForm");
-
-  if (wish) {
-    wish.addEventListener("submit", (e) => {
-
-      if (!prepareForm(wish)) {
-        e.preventDefault();
-
-        document.getElementById("wishStatus").textContent =
-          "Chưa cấu hình Google Apps Script.";
-
-        return;
-      }
-
-      document.getElementById("wishStatus").textContent =
-        "Đã gửi lời chúc. Xin cảm ơn!";
-    });
-  }
-
+  const wish=document.getElementById("wishForm");
+  wish.addEventListener("submit",(e)=>{
+    if(!prepareForm(wish)){
+      e.preventDefault();
+      document.getElementById("wishStatus").textContent="Bạn chưa điền link Google Apps Script trong script.js.";
+      return;
+    }
+    document.getElementById("wishStatus").textContent="Đã gửi lời chúc. Xin cảm ơn!";
+  });
 });
