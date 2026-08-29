@@ -3,7 +3,7 @@
 // =============================
 
 const FORM_URL =
-  "https://docs.google.com/forms/d/e/1FAIpQLSfT6gi-E1huEczB7JhNbfjz4yiuipkzO7otzDen4qcr_m8DSQ/formResponse";
+  "https://docs.google.com/forms/d/e/1FAIpQLSfT6gi-E1huEczB7JhNbfjz4yiuipkzO7otzDen4qcr_m8DSQ/viewform?usp=header";
 
 // Mã các câu hỏi trong Google Form
 const ENTRY_NAME = "entry.2082199092";
