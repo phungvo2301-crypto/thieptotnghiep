@@ -1,7 +1,7 @@
 // =============================
 // CHỈNH CẤU HÌNH Ở ĐÂY
 // =============================
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwxJCetCJVJzRFCPYfKptArR5cdtJHDmVfEk2HDHFSb8r6yDaFoKSx51yXc5o4M0lX4PA/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxZzaHuIuWUw1AEeswaZP4BFYzhbERw49zVb4gC6z8_1jaMPTXbKndrRZEM8lM2j1XW/exec";
 
 // Thêm / sửa câu hỏi tại đây. Có thể để [] nếu chưa muốn hỏi.
 const QUESTIONS = [
