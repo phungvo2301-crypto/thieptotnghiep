@@ -36,7 +36,7 @@ function escapeAttr(s){return escapeHtml(s)}
 
 function prepareForm(form){
   // Nếu chưa cấu hình URL, không gửi nhầm dữ liệu.
-  if(!SCRIPT_URL || SCRIPT_URL.includes("DAN_LINK")){
+  if(!SCRIPT_URL || SCRIPT_URL.includes("https://script.google.com/macros/s/AKfycbyjgmY-9iS87bpf1YVAo-0gFsidwrAYVNlyYfCRvPpADpp8nRAUfK1cCQQm_JvYsBKl/exec")){
     return false;
   }
   form.action=SCRIPT_URL;
