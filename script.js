@@ -97,31 +97,22 @@ function escapeAttr(s) {
 // GỬI RSVP VÀO GOOGLE FORM
 // =============================
 
+```js
 function setupRSVP() {
 
-  const rsvp =
-    document.getElementById("rsvpForm");
+  const rsvp = document.getElementById("rsvpForm");
 
   if (!rsvp) return;
-
 
   rsvp.addEventListener("submit", function(e) {
 
     e.preventDefault();
-
-
-    // =============================
-    // LẤY DỮ LIỆU
-    // =============================
 
     const nameInput =
       rsvp.querySelector('input[name="name"]');
 
     const attendanceInput =
       rsvp.querySelector('select[name="attendance"]');
-
-    const guestsInput =
-      rsvp.querySelector('input[name="guests"]');
 
     const status =
       document.getElementById("rsvpStatus");
@@ -134,10 +125,8 @@ function setupRSVP() {
     if (!nameInput || !attendanceInput) {
 
       if (status) {
-
         status.textContent =
           "Không tìm thấy thông tin biểu mẫu.";
-
       }
 
       return;
@@ -149,10 +138,8 @@ function setupRSVP() {
       nameInput.focus();
 
       if (status) {
-
         status.textContent =
           "Vui lòng nhập họ và tên.";
-
       }
 
       return;
@@ -164,10 +151,8 @@ function setupRSVP() {
       attendanceInput.focus();
 
       if (status) {
-
         status.textContent =
-          "Vui lòng chọn Có tham dự hoặc Không tham dự.";
-
+          "Vui lòng chọn bạn có tham dự hay không.";
       }
 
       return;
@@ -175,60 +160,63 @@ function setupRSVP() {
 
 
     // =============================
-    // LƯU TÊN FIELD BAN ĐẦU
+    // TẠO FORM GỬI GOOGLE FORM
     // =============================
 
-    const originalName =
-      nameInput.name;
+    const googleForm =
+      document.createElement("form");
 
-    const originalAttendance =
-      attendanceInput.name;
+    googleForm.method = "POST";
 
-    const originalGuests =
-      guestsInput ? guestsInput.name : null;
+    googleForm.action = FORM_URL;
+
+    googleForm.target = "submitFrame";
+
+    googleForm.style.display = "none";
 
 
     // =============================
-    // ĐỔI FIELD SANG GOOGLE FORM
+    // HỌ TÊN
     // =============================
 
-    nameInput.name =
-      ENTRY_NAME;
+    const nameField =
+      document.createElement("input");
 
-    attendanceInput.name =
+    nameField.type = "hidden";
+
+    nameField.name = ENTRY_NAME;
+
+    nameField.value =
+      nameInput.value.trim();
+
+    googleForm.appendChild(nameField);
+
+
+    // =============================
+    // THAM DỰ
+    // =============================
+
+    const attendanceField =
+      document.createElement("input");
+
+    attendanceField.type = "hidden";
+
+    attendanceField.name =
       ENTRY_ATTENDANCE;
 
+    attendanceField.value =
+      attendanceInput.value;
 
-    // =============================
-    // GỬI SỐ NGƯỜI
-    // =============================
-
-    // Nếu Google Form của bạn có câu hỏi
-    // "Số người tham dự", hãy đặt mã entry
-    // vào biến ENTRY_GUESTS ở phía trên.
-    //
-    // Hiện tại chưa có mã nên không gửi field này.
+    googleForm.appendChild(attendanceField);
 
 
     // =============================
-    // ĐỔI NƠI NHẬN DỮ LIỆU
+    // GỬI
     // =============================
 
-    rsvp.action =
-      FORM_URL;
+    document.body.appendChild(googleForm);
 
-    rsvp.method =
-      "POST";
-
-    rsvp.target =
-      "submitFrame";
-
-
-    // =============================
-    // GỬI FORM
-    // =============================
-
-    rsvp.submit();
+    googleForm.submit();
 
 
     // =============================
@@ -244,28 +232,19 @@ function setupRSVP() {
 
 
     // =============================
-    // KHÔI PHỤC FIELD
+    // XÓA FORM TẠM
     // =============================
 
     setTimeout(() => {
 
-      nameInput.name =
-        originalName;
+      googleForm.remove();
 
-      attendanceInput.name =
-        originalAttendance;
-
-      if (guestsInput && originalGuests) {
-
-        guestsInput.name =
-          originalGuests;
-
-      }
-
-    }, 500);
+    }, 1000);
 
   });
 }
+```
+
 
 
 // =============================
