@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Lễ Tốt Nghiệp</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="site">
+    <section class="hero">
+      <div class="hero-overlay"></div>
+      <img src="img/graduation.jpg" class="hero-img" alt="Ảnh lễ tốt nghiệp">
+      <div class="hero-content">
+        <p class="eyebrow">THƯ MỜI</p>
+        <h1>LỄ<br>TỐT NGHIỆP</h1>
+        <p>Trân trọng kính mời bạn đến tham dự</p>
+        <button class="gold-btn" onclick="showSection('details')">MỞ THIỆP</button>
+      </div>
+    </section>
+
+    <section id="details" class="card hidden">
+      <p class="eyebrow">THÔNG TIN BUỔI TIỆC</p>
+      <h2>Tham dự Lễ Tốt Nghiệp</h2>
+      <div class="info">
+        <div><span>⏰</span><b>Thời gian</b><p>08:30</p></div>
+        <div><span>📍</span><b>Địa điểm</b><p>Trường Đại học Giao thông Vận tải</p></div>
+        <div><span>🏫</span><b>Địa chỉ</b><p>Số 03 Cầu Giấy, Láng, Hà Nội</p></div>
+      </div>
+      <button class="gold-btn" onclick="showSection('map')">XEM ĐỊA ĐIỂM</button>
+    </section>
+
+    <section id="map" class="card hidden">
+      <p class="eyebrow">ĐỊA ĐIỂM</p>
+      <h2>Trường Đại học Giao thông Vận tải</h2>
+      <p>Số 03 Cầu Giấy, Láng, Hà Nội</p>
+      <a class="gold-btn link-btn" href="https://www.google.com/maps/search/?api=1&query=Tr%C6%B0%E1%BB%9Dng%20%C4%90%E1%BA%A1i%20h%E1%BB%8Dc%20Giao%20th%C3%B4ng%20V%E1%BA%ADn%20t%E1%BA%A3i%2C%20S%E1%BB%91%2003%20C%E1%BA%A7u%20Gi%E1%BA%A5y%2C%20L%C3%A1ng%2C%20H%C3%A0%20N%E1%BB%99i" target="_blank">📍 XEM GOOGLE MAPS</a>
+      <button class="outline-btn" onclick="showSection('rsvp')">XÁC NHẬN THAM DỰ</button>
+    </section>
+
+    <section id="rsvp" class="card hidden">
+      <p class="eyebrow">XÁC NHẬN</p>
+      <h2>Bạn có tham dự không?</h2>
+
+      <form id="rsvpForm" class="form" method="POST" target="submitFrame">
+        <input type="hidden" name="type" value="rsvp">
+        <label>Họ và tên <span>*</span></label>
+        <input name="name" required placeholder="Nhập họ và tên">
+
+        <label>Bạn có tham dự không? <span>*</span></label>
+        <select name="attendance" required>
+          <option value="">-- Chọn --</option>
+          <option value="Có, tôi sẽ tham dự">Có, tôi sẽ tham dự</option>
+          <option value="Rất tiếc, tôi không thể tham dự">Rất tiếc, tôi không thể tham dự</option>
+        </select>
+
+        <label>Số người tham dự</label>
+        <input name="guests" type="number" min="1" max="20" value="1">
+
+        <div id="questions"></div>
+
+        <button class="gold-btn" type="submit">✉ GỬI XÁC NHẬN</button>
+      </form>
+      <iframe name="submitFrame" id="submitFrame" hidden></iframe>
+      <p id="rsvpStatus" class="status"></p>
+    </section>
+
+    <section id="wish" class="card hidden">
+      <p class="eyebrow">LỜI CHÚC</p>
+      <h2>Gửi một lời chúc</h2>
+      <form id="wishForm" class="form" method="POST" target="wishFrame">
+        <input type="hidden" name="type" value="wish">
+        <label>Họ và tên <span>*</span></label>
+        <input name="name" required placeholder="Tên của bạn">
+        <label>Lời chúc <span>*</span></label>
+        <textarea name="wish" required maxlength="500" rows="6" placeholder="Viết lời chúc của bạn..."></textarea>
+        <button class="gold-btn" type="submit">♡ GỬI LỜI CHÚC</button>
+      </form>
+      <iframe name="wishFrame" id="wishFrame" hidden></iframe>
+      <p id="wishStatus" class="status"></p>
+    </section>
+
+    <section class="card wishes">
+      <p class="eyebrow">💖 LỜI CHÚC</p>
+      <h2>Cảm ơn bạn đã gửi lời chúc</h2>
+      <div id="wishList">
+        <p class="muted">Lời chúc sẽ được hiển thị tại đây sau khi bạn kết nối Google Apps Script.</p>
+      </div>
+    </section>
+
+    <footer>🎓 Cảm ơn bạn đã góp phần làm nên một ngày thật ý nghĩa.</footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

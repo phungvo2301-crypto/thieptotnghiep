@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1500" viewBox="0 0 1200 1500">
+<defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#081a35"/><stop offset="1" stop-color="#c8942e"/></linearGradient></defs>
+<rect width="1200" height="1500" fill="url(#g)"/>
+<circle cx="600" cy="520" r="190" fill="#fff" opacity=".12"/>
+<path d="M300 1030h600l-300-210z" fill="#fff" opacity=".9"/>
+<path d="M380 1030h440v110H380z" fill="#fff" opacity=".9"/>
+<text x="600" y="350" text-anchor="middle" fill="#fff" font-size="80" font-family="Georgia">LỄ TỐT NGHIỆP</text>
+<text x="600" y="1250" text-anchor="middle" fill="#fff" font-size="34" font-family="Arial">THAY ẢNH NÀY BẰNG ẢNH CỦA BẠN</text>
+</svg>
