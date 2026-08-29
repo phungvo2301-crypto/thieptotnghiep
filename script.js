@@ -34,11 +34,13 @@ function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":
 function escapeAttr(s){return escapeHtml(s)}
 
 function prepareForm(form){
-  // Nếu chưa cấu hình URL, không gửi nhầm dữ liệu.
-  if(!SCRIPT_URL || SCRIPT_URL.includes("DAN_LINK")){
+  if(!SCRIPT_URL){
     return false;
   }
-  form.action=SCRIPT_URL;
+
+  form.action = SCRIPT_URL;
+  form.method = "POST";
+
   return true;
 }
 
