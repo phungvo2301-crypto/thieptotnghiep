@@ -2360,3 +2360,25 @@ footer {
   margin: 4px 0;
   line-height: 1.5;
 }
+/* Tối ưu tiêu đề trên Mobile */
+.item-header b {
+  font-size: 0.85rem !important; /* Thu nhỏ phông chữ vừa vặn màn hình nhỏ */
+  white-space: nowrap !important; /* Ép tiêu đề luôn nằm trên 1 dòng */
+  letter-spacing: 0px !important; /* Thu hẹp khoảng cách chữ */
+  text-transform: uppercase;
+}
+
+/* Đảm bảo icon và tiêu đề nằm ngang hàng chuẩn */
+.item-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important; /* Giảm khoảng cách giữa icon và chữ */
+  width: 100% !important;
+}
+
+/* Nếu tiêu đề chính H2 bị rớt dòng */
+h2 {
+  font-size: 1.3rem !important;
+  white-space: normal;
+  line-height: 1.3;
+}
