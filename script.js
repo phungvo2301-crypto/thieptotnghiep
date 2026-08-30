@@ -1,4 +1,3 @@
-```javascript
 // =============================
 // GOOGLE FORM
 // =============================
@@ -13,14 +12,6 @@ const ENTRY_WISH = "entry.1647574086";
 
 
 // =============================
-// TRẠNG THÁI
-// =============================
-
-// Chưa xác nhận RSVP
-let rsvpConfirmed = false;
-
-
-// =============================
 // HIỂN THỊ SECTION
 // =============================
 
@@ -28,62 +19,20 @@ function showSection(id) {
 
   const el = document.getElementById(id);
 
-  if (!el) return;
+  if (el) {
 
+    el.classList.remove("hidden");
 
-  // Không cho mở phần lời chúc
-  // nếu chưa xác nhận RSVP
+    setTimeout(() => {
 
-  if (id === "wish" && !rsvpConfirmed) {
+      el.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
 
-    const rsvp =
-      document.getElementById("rsvp");
+    }, 30);
 
-    const status =
-      document.getElementById("rsvpStatus");
-
-
-    if (status) {
-
-      status.textContent =
-        "Vui lòng xác nhận tham dự trước khi gửi lời chúc.";
-
-    }
-
-
-    if (rsvp) {
-
-      rsvp.classList.remove("hidden");
-
-      setTimeout(() => {
-
-        rsvp.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-      }, 30);
-
-    }
-
-    return;
   }
-
-
-  // Hiển thị section
-
-  el.classList.remove("hidden");
-
-
-  setTimeout(() => {
-
-    el.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-
-  }, 30);
-
 }
 
 
@@ -93,7 +42,6 @@ function showSection(id) {
 
 const QUESTIONS = [];
 
-
 function renderQuestions() {
 
   const box =
@@ -101,9 +49,7 @@ function renderQuestions() {
 
   if (!box) return;
 
-
   box.innerHTML = "";
-
 
   QUESTIONS.forEach((q, i) => {
 
@@ -111,7 +57,6 @@ function renderQuestions() {
       document.createElement("div");
 
     wrap.className = "question";
-
 
     wrap.innerHTML = `
       <label>
@@ -126,17 +71,11 @@ function renderQuestions() {
       >
     `;
 
-
     box.appendChild(wrap);
 
   });
-
 }
 
-
-// =============================
-// ESCAPE HTML
-// =============================
 
 function escapeHtml(s) {
 
@@ -155,31 +94,7 @@ function escapeHtml(s) {
 
 
 function escapeAttr(s) {
-
   return escapeHtml(s);
-
-}
-
-
-// =============================
-// HIỆN NÚT GỬI LỜI CHÚC
-// =============================
-
-function showWishButton() {
-
-  const wishButton =
-    document.getElementById("wishButton");
-
-  if (!wishButton) return;
-
-
-  rsvpConfirmed = true;
-
-
-  wishButton.classList.remove("hidden");
-
-  wishButton.style.display = "block";
-
 }
 
 
@@ -218,10 +133,6 @@ function setupRSVP() {
         );
 
 
-      // =========================
-      // KIỂM TRA
-      // =========================
-
       if (!nameInput ||
           !attendanceInput) {
 
@@ -236,6 +147,8 @@ function setupRSVP() {
       }
 
 
+      // Kiểm tra họ tên
+
       if (!nameInput.value.trim()) {
 
         nameInput.focus();
@@ -243,6 +156,8 @@ function setupRSVP() {
         return;
       }
 
+
+      // Kiểm tra tham dự
 
       if (!attendanceInput.value) {
 
@@ -252,20 +167,7 @@ function setupRSVP() {
       }
 
 
-      // =========================
-      // LƯU TÊN FIELD GỐC
-      // =========================
-
-      const originalName =
-        nameInput.name;
-
-      const originalAttendance =
-        attendanceInput.name;
-
-
-      // =========================
-      // ĐỔI FIELD GOOGLE FORM
-      // =========================
+      // Đổi tên field
 
       nameInput.name =
         ENTRY_NAME;
@@ -274,9 +176,7 @@ function setupRSVP() {
         ENTRY_ATTENDANCE;
 
 
-      // =========================
-      // CẤU HÌNH FORM
-      // =========================
+      // Gửi Google Form
 
       rsvp.action =
         FORM_URL;
@@ -288,19 +188,10 @@ function setupRSVP() {
         "submitFrame";
 
 
-      // =========================
-      // GỬI
-      // =========================
-
       rsvp.submit();
 
 
-      // =========================
-      // ĐÃ XÁC NHẬN
-      // =========================
-
-      rsvpConfirmed = true;
-
+      // Thông báo
 
       if (status) {
 
@@ -310,43 +201,15 @@ function setupRSVP() {
       }
 
 
-      // Hiện nút gửi lời chúc
-
-      showWishButton();
-
-
-      // =========================
-      // ĐỔI NÚT
-      // =========================
-
-      const submitButton =
-        rsvp.querySelector(
-          'button[type="submit"]'
-        );
-
-
-      if (submitButton) {
-
-        submitButton.disabled =
-          true;
-
-        submitButton.textContent =
-          "✓ ĐÃ XÁC NHẬN";
-
-      }
-
-
-      // =========================
-      // KHÔI PHỤC FIELD
-      // =========================
+      // Khôi phục
 
       setTimeout(() => {
 
         nameInput.name =
-          originalName;
+          "name";
 
         attendanceInput.name =
-          originalAttendance;
+          "attendance";
 
       }, 500);
 
@@ -375,25 +238,6 @@ function setupWish() {
     function(e) {
 
       e.preventDefault();
-
-
-      // Chưa RSVP
-      if (!rsvpConfirmed) {
-
-        const status =
-          document.getElementById(
-            "wishStatus"
-          );
-
-        if (status) {
-
-          status.textContent =
-            "Vui lòng xác nhận tham dự trước.";
-
-        }
-
-        return;
-      }
 
 
       const nameInput =
@@ -435,6 +279,8 @@ function setupWish() {
       }
 
 
+      // Kiểm tra họ tên
+
       if (!nameInput.value.trim()) {
 
         nameInput.focus();
@@ -442,6 +288,8 @@ function setupWish() {
         return;
       }
 
+
+      // Kiểm tra lời chúc
 
       if (!wishInput.value.trim()) {
 
@@ -452,18 +300,7 @@ function setupWish() {
 
 
       // =========================
-      // LƯU FIELD GỐC
-      // =========================
-
-      const originalName =
-        nameInput.name;
-
-      const originalWish =
-        wishInput.name;
-
-
-      // =========================
-      // ĐỔI TÊN GOOGLE FORM
+      // ĐỔI TÊN FIELD
       // =========================
 
       nameInput.name =
@@ -474,7 +311,7 @@ function setupWish() {
 
 
       // =========================
-      // GỬI
+      // GỬI GOOGLE FORM
       // =========================
 
       wish.action =
@@ -503,19 +340,23 @@ function setupWish() {
 
 
       // =========================
-      // HIỆN CẢM ƠN
+      // HIỆN PHẦN CẢM ƠN
       // =========================
 
       if (thanks) {
 
+        // Xóa trạng thái ẩn
         thanks.classList.remove(
           "hidden"
         );
 
+
+        // Đảm bảo hiển thị
         thanks.style.display =
           "block";
 
 
+        // Cuộn tới phần cảm ơn
         setTimeout(() => {
 
           thanks.scrollIntoView({
@@ -550,16 +391,16 @@ function setupWish() {
 
 
       // =========================
-      // KHÔI PHỤC
+      // KHÔI PHỤC FIELD
       // =========================
 
       setTimeout(() => {
 
         nameInput.name =
-          originalName;
+          "name";
 
         wishInput.name =
-          originalWish;
+          "wish";
 
       }, 500);
 
@@ -585,4 +426,3 @@ document.addEventListener(
 
   }
 );
-```
