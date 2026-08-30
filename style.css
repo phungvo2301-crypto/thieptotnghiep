@@ -1,33 +1,25 @@
 /* =========================================
-   THIỆP LỄ TỐT NGHIỆP
-   Phong cách: TRẺ TRUNG / TƯƠI SÁNG / HIỆN ĐẠI
-   Font: Times New Roman
+   THIỆP TỐT NGHIỆP
+   TRẺ TRUNG - TƯƠI SÁNG - HIỆN ĐẠI
 ========================================= */
 
 :root {
   --bg: #f2f9ff;
-  --card: rgba(255, 255, 255, 0.96);
+  --card: rgba(255,255,255,.96);
 
   --text: #243447;
   --muted: #68798a;
 
   --blue: #3aa7e8;
   --blue-dark: #1685c5;
-  --blue-light: #dff3ff;
 
   --yellow: #ffc857;
-  --yellow-light: #fff3c7;
-
   --pink: #ff8fa3;
-  --pink-light: #ffe5eb;
 
-  --green: #67c587;
-  --green-light: #e2f7e9;
-
-  --border: rgba(58, 167, 232, 0.18);
+  --border: rgba(58,167,232,.15);
 
   --shadow:
-    0 15px 40px rgba(45, 120, 170, 0.12);
+    0 15px 40px rgba(45,120,170,.12);
 }
 
 
@@ -41,6 +33,13 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -72,10 +71,9 @@ body {
     serif;
 
   line-height: 1.6;
+
+  -webkit-text-size-adjust: 100%;
 }
-
-
-/* Đồng bộ font */
 
 button,
 input,
@@ -89,7 +87,7 @@ textarea {
 
 
 /* =========================================
-   MAIN
+   KHUNG CHÍNH
 ========================================= */
 
 .site {
@@ -98,7 +96,7 @@ textarea {
 
   margin: 0 auto;
 
-  padding-bottom: 50px;
+  padding-bottom: 30px;
 }
 
 
@@ -109,7 +107,8 @@ textarea {
 .hero {
   position: relative;
 
-  min-height: 100vh;
+  width: 100%;
+  height: 100svh;
   min-height: 100svh;
 
   display: flex;
@@ -123,8 +122,6 @@ textarea {
 }
 
 
-/* Ảnh */
-
 .hero-img {
   position: absolute;
 
@@ -134,12 +131,14 @@ textarea {
   height: 100%;
 
   object-fit: cover;
+  object-position: center;
 
   transform: scale(1.03);
+
+  animation:
+    heroImageZoom 8s ease-out forwards;
 }
 
-
-/* Lớp phủ sáng hơn */
 
 .hero-overlay {
   position: absolute;
@@ -151,24 +150,22 @@ textarea {
   background:
     linear-gradient(
       180deg,
-      rgba(16, 119, 180, 0.15),
-      rgba(15, 87, 135, 0.48)
+      rgba(16,119,180,.08),
+      rgba(15,87,135,.52)
     );
 }
 
-
-/* Nội dung */
 
 .hero-content {
   position: relative;
 
   z-index: 2;
 
-  width: calc(100% - 40px);
+  width: calc(100% - 32px);
 
-  max-width: 620px;
+  max-width: 520px;
 
-  padding: 45px 25px;
+  padding: 30px 16px;
 
   text-align: center;
 
@@ -177,16 +174,11 @@ textarea {
 
 
 /* =========================================
-   EYEBROW
+   HERO TEXT
 ========================================= */
 
 .eyebrow {
   margin: 0 0 12px;
-
-  font-family:
-    "Times New Roman",
-    Times,
-    serif;
 
   font-size: 14px;
 
@@ -201,49 +193,145 @@ textarea {
   color: #fff3b0;
 
   text-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.18);
+    0 2px 8px rgba(0,0,0,.18);
 }
 
 
-/* =========================================
-   HERO TITLE
-========================================= */
-
 .hero h1 {
-  margin: 10px 0 22px;
-
-  font-family:
-    "Times New Roman",
-    Times,
-    serif;
+  margin: 8px 0 18px;
 
   font-size:
-    clamp(48px, 11vw, 90px);
+    clamp(43px,13vw,70px);
 
-  line-height: 0.95;
+  line-height: .95;
 
-  letter-spacing: 5px;
+  letter-spacing: 2px;
 
   font-weight: bold;
 
   color: white;
 
   text-shadow:
-    0 4px 18px rgba(0, 0, 0, 0.25);
+    0 4px 18px rgba(0,0,0,.25);
 }
 
 
-.hero-content > p:not(.eyebrow) {
+.hero-description {
+  width: 100%;
+
   max-width: 480px;
 
-  margin: 0 auto 30px;
+  margin: 0 auto 25px;
 
-  font-size: 18px;
+  font-size: 16px;
 
-  color: rgba(255, 255, 255, 0.96);
+  line-height: 1.5;
+
+  color: rgba(255,255,255,.96);
 
   text-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.18);
+    0 2px 8px rgba(0,0,0,.18);
+}
+
+
+/* =========================================
+   HERO ANIMATION
+========================================= */
+
+.hero-eyebrow,
+.hero-title,
+.hero-description,
+.hero-button {
+  opacity: 0;
+
+  transform: translateY(20px);
+}
+
+
+.hero-eyebrow {
+  animation:
+    heroFadeUp 1s ease forwards;
+
+  animation-delay: 1.2s;
+}
+
+
+.hero-title {
+  transform: translateY(25px);
+
+  animation:
+    heroFadeUp 1.2s ease forwards;
+
+  animation-delay: 1.4s;
+}
+
+
+.hero-description {
+  animation:
+    heroFadeUp 1s ease forwards;
+
+  animation-delay: 2.1s;
+}
+
+
+.hero-button {
+  transform:
+    translateY(20px)
+    scale(.95);
+
+  animation:
+    heroButtonAppear 1s ease forwards;
+
+  animation-delay: 2.8s;
+}
+
+
+@keyframes heroFadeUp {
+
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+@keyframes heroButtonAppear {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(25px)
+      scale(.95);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+}
+
+
+@keyframes heroImageZoom {
+
+  from {
+    transform: scale(1.03);
+  }
+
+  to {
+    transform: scale(1.08);
+  }
+
 }
 
 
@@ -260,35 +348,26 @@ textarea {
 
   min-height: 50px;
 
-  padding: 12px 28px;
+  padding: 12px 24px;
 
   border-radius: 999px;
-
-  font-family:
-    "Times New Roman",
-    Times,
-    serif;
 
   font-size: 15px;
 
   font-weight: bold;
 
-  letter-spacing: 0.8px;
+  letter-spacing: .8px;
 
   text-decoration: none;
 
   cursor: pointer;
 
   transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
+    transform .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
 }
 
-
-/* =========================================
-   NÚT CHÍNH
-========================================= */
 
 .gold-btn {
   border: none;
@@ -303,24 +382,19 @@ textarea {
   color: #5d4300;
 
   box-shadow:
-    0 8px 22px rgba(255, 184, 55, 0.35);
+    0 8px 22px
+    rgba(255,184,55,.35);
 }
+
 
 .gold-btn:hover {
   transform: translateY(-3px);
 
   box-shadow:
-    0 12px 28px rgba(255, 184, 55, 0.45);
+    0 12px 28px
+    rgba(255,184,55,.45);
 }
 
-.gold-btn:active {
-  transform: translateY(0);
-}
-
-
-/* =========================================
-   OUTLINE BUTTON
-========================================= */
 
 .outline-btn {
   margin-top: 18px;
@@ -330,10 +404,8 @@ textarea {
   background: white;
 
   color: var(--blue-dark);
-
-  box-shadow:
-    0 5px 16px rgba(58, 167, 232, 0.1);
 }
+
 
 .outline-btn:hover {
   background: var(--blue);
@@ -344,9 +416,9 @@ textarea {
 }
 
 
-/* Google Maps */
-
 .link-btn {
+  width: 100%;
+
   margin-bottom: 10px;
 }
 
@@ -358,26 +430,26 @@ textarea {
 .card {
   position: relative;
 
-  margin: 22px 18px;
+  width: calc(100% - 24px);
 
-  padding: 34px 28px;
+  margin: 14px auto;
+
+  padding: 30px 20px;
 
   background: var(--card);
 
-  border: 2px solid rgba(58, 167, 232, 0.1);
+  border: 2px solid rgba(58,167,232,.1);
 
-  border-radius: 28px;
+  border-radius: 22px;
 
   box-shadow: var(--shadow);
 
   backdrop-filter: blur(10px);
 
   animation:
-    fadeUp 0.55s ease both;
+    fadeUp .55s ease both;
 }
 
-
-/* Trang trí nhỏ phía trên card */
 
 .card::before {
   content: "";
@@ -402,27 +474,17 @@ textarea {
 }
 
 
-/* =========================================
-   CARD TITLE
-========================================= */
-
 .card h2 {
-  margin: 0 0 24px;
-
-  font-family:
-    "Times New Roman",
-    Times,
-    serif;
+  margin: 0 0 20px;
 
   font-size:
-    clamp(27px, 6vw, 38px);
-
-  font-weight: bold;
+    clamp(26px,7vw,34px);
 
   line-height: 1.2;
 
   color: #263b4d;
 }
+
 
 .card > p:not(.eyebrow) {
   color: var(--muted);
@@ -432,29 +494,197 @@ textarea {
 
 
 /* =========================================
-   INFO
+   PROFILE
 ========================================= */
 
-.info {
-  display: grid;
-
-  grid-template-columns:
-    repeat(3, 1fr);
-
-  gap: 14px;
-
-  margin: 28px 0;
+.profile-card {
+  text-align: center;
 }
 
 
-/* từng ô */
+.profile-photo {
+  width: 150px;
+  height: 150px;
 
-.info > div {
-  padding: 20px 14px;
+  margin: 10px auto 18px;
+
+  padding: 5px;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--yellow),
+      var(--pink)
+    );
+
+  box-shadow:
+    0 10px 25px
+    rgba(58,167,232,.18);
+}
+
+
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 4px solid white;
+}
+
+
+.profile-name {
+  margin: 5px 0 20px !important;
+
+  color: #263b4d;
+
+  font-size:
+    clamp(24px,7vw,32px) !important;
+
+  letter-spacing: 1px;
+}
+
+
+.profile-info {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  text-align: left;
+}
+
+
+.profile-info > div {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 14px;
+
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f0faff,
+      #fffdf4
+    );
+
+  border: 1px solid
+    rgba(58,167,232,.12);
+}
+
+
+.profile-info > div > span {
+  flex: 0 0 38px;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 23px;
+}
+
+
+.profile-info b {
+  display: block;
+
+  margin-bottom: 2px;
+
+  color: var(--blue-dark);
+
+  font-size: 14px;
+}
+
+
+.profile-info p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 15px;
+
+  line-height: 1.4;
+}
+
+
+.profile-message {
+  margin-top: 20px;
+
+  padding: 18px;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff9dd,
+      #fff
+    );
+
+  border-left: 4px solid var(--yellow);
+}
+
+
+.profile-message p {
+  margin: 0;
+
+  color: #68737c;
+
+  font-size: 15px;
+
+  font-style: italic;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   THÔNG TIN BUỔI LỄ
+========================================= */
+
+.graduation-date {
+  display: flex !important;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+  margin: 22px 0;
+}
+
+
+.event-info-item {
+  width: 100%;
+
+  padding: 22px 15px;
+
+  margin-bottom: 12px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
 
   text-align: center;
 
-  border-radius: 20px;
+  border-radius: 19px;
 
   background:
     linear-gradient(
@@ -464,64 +694,142 @@ textarea {
     );
 
   border: 1px solid
-    rgba(58, 167, 232, 0.13);
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.info > div:hover {
-  transform: translateY(-4px);
+    rgba(58,167,232,.13);
 
   box-shadow:
-    0 10px 25px
-    rgba(58, 167, 232, 0.13);
+    0 6px 18px
+    rgba(58,167,232,.07);
 }
 
 
-/* icon */
-
-.info span {
+.item-icon {
   display: block;
 
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 
-  font-size: 28px;
+  font-size: 1.8rem;
 }
 
 
-/* title */
+.item-title {
+  width: 100%;
 
-.info b {
-  display: block;
+  margin-bottom: 14px;
 
-  margin-bottom: 5px;
+  font-weight: bold;
 
-  font-family:
-    "Times New Roman",
-    Times,
-    serif;
+  font-size: .95rem;
 
-  font-size: 15px;
+  color: #1a365d;
 
-  color: var(--blue-dark);
+  text-transform: uppercase;
+
+  letter-spacing: .5px;
+
+  line-height: 1.3;
 }
 
 
-/* nội dung */
+.item-content {
+  width: 100%;
+}
 
-.info p {
-  margin: 0;
 
-  font-family:
-    "Times New Roman",
-    Times,
-    serif;
+.item-content p {
+  width: 100%;
 
-  font-size: 14px;
+  margin: 6px 0;
+
+  font-size: 1rem;
+
+  line-height: 1.6;
 
   color: var(--muted);
+
+  white-space: normal;
+
+  word-break: keep-all;
+
+  overflow-wrap: break-word;
+}
+
+
+.calendar-date {
+  color: #263b4d !important;
+
+  font-size: 25px !important;
+
+  font-weight: bold;
+}
+
+
+.calendar-time {
+  color: var(--blue-dark) !important;
+
+  font-size: 22px !important;
+
+  font-weight: bold;
+}
+
+
+/* =========================================
+   COUNTDOWN
+========================================= */
+
+.countdown {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap: 5px;
+
+  width: 100%;
+
+  margin-top: 13px;
+}
+
+
+.countdown > div {
+  min-width: 0;
+
+  padding: 10px 3px;
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #eaf7ff
+    );
+
+  border: 1px solid
+    rgba(58,167,232,.12);
+}
+
+
+.countdown strong {
+  display: block;
+
+  color: var(--blue-dark);
+
+  font-size: 20px;
+
+  line-height: 1.1;
+}
+
+
+.countdown small {
+  display: block;
+
+  margin-top: 4px;
+
+  color: var(--muted);
+
+  font-size: 9px;
+
+  font-weight: bold;
 }
 
 
@@ -534,68 +842,53 @@ textarea {
 
   flex-direction: column;
 
-  gap: 9px;
+  gap: 7px;
 }
 
 
-/* Label */
-
 .form label {
-  margin-top: 10px;
+  margin-top: 9px;
 
-  font-family:
-    "Times New Roman",
-    Times,
-    serif;
-
-  font-size: 16px;
+  font-size: 15px;
 
   font-weight: bold;
 
   color: #34495a;
 }
 
+
 .form label span {
   color: #ff5f73;
 }
 
-
-/* =========================================
-   INPUT
-========================================= */
 
 .form input,
 .form select,
 .form textarea {
   width: 100%;
 
-  padding: 14px 16px;
+  min-height: 50px;
+
+  padding: 13px 14px;
 
   border: 2px solid #e1edf4;
 
-  border-radius: 14px;
+  border-radius: 13px;
 
   background: #fbfdff;
 
   color: var(--text);
-
-  font-family:
-    "Times New Roman",
-    Times,
-    serif;
 
   font-size: 16px;
 
   outline: none;
 
   transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
+    border-color .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
 }
 
-
-/* Focus */
 
 .form input:focus,
 .form select:focus,
@@ -606,33 +899,22 @@ textarea {
 
   box-shadow:
     0 0 0 4px
-    rgba(58, 167, 232, 0.12);
+    rgba(58,167,232,.12);
 }
 
 
-/* Placeholder */
-
 .form input::placeholder,
 .form textarea::placeholder {
-  font-family:
-    "Times New Roman",
-    Times,
-    serif;
-
   color: #9baab5;
 }
 
 
-/* Textarea */
-
 .form textarea {
-  min-height: 130px;
+  min-height: 120px;
 
   resize: vertical;
 }
 
-
-/* Submit */
 
 .form .gold-btn {
   width: 100%;
@@ -649,10 +931,11 @@ textarea {
   margin-top: 10px;
 }
 
-.question {
-  margin-top: 18px;
 
-  padding: 18px;
+.question {
+  margin-top: 14px;
+
+  padding: 15px;
 
   background:
     linear-gradient(
@@ -661,11 +944,12 @@ textarea {
       #fffdf4
     );
 
-  border-radius: 16px;
+  border-radius: 14px;
 
   border: 1px solid
-    rgba(58, 167, 232, 0.13);
+    rgba(58,167,232,.13);
 }
+
 
 .question label {
   margin-top: 0;
@@ -679,30 +963,26 @@ textarea {
 .status {
   min-height: 24px;
 
-  margin: 16px 0 0;
+  margin: 13px 0 0;
 
   text-align: center;
 
-  font-family:
-    "Times New Roman",
-    Times,
-    serif;
-
   color: var(--blue-dark);
 
-  font-size: 16px;
+  font-size: 14px;
 
   font-weight: bold;
 }
 
 
 /* =========================================
-   WISHES
+   WISH
 ========================================= */
 
 .wishes {
   overflow: hidden;
 }
+
 
 #wishList {
   display: flex;
@@ -713,10 +993,8 @@ textarea {
 }
 
 
-/* từng lời chúc */
-
 .wish-item {
-  padding: 18px 20px;
+  padding: 15px 16px;
 
   background:
     linear-gradient(
@@ -727,63 +1005,33 @@ textarea {
 
   border-left: 4px solid var(--yellow);
 
-  border-radius: 14px;
-
-  box-shadow:
-    0 5px 15px
-    rgba(255, 200, 87, 0.08);
+  border-radius: 13px;
 }
 
-
-/* tên */
 
 .wish-item strong {
   display: block;
 
   margin-bottom: 5px;
 
-  font-family:
-    "Times New Roman",
-    Times,
-    serif;
-
   color: #d99500;
 
-  font-size: 16px;
+  font-size: 15px;
 }
 
-
-/* lời chúc */
 
 .wish-item p {
   margin: 0;
 
-  font-family:
-    "Times New Roman",
-    Times,
-    serif;
-
   color: #555f67;
 
-  font-size: 15px;
+  font-size: 14px;
+
+  line-height: 1.6;
 
   white-space: pre-wrap;
 
   overflow-wrap: anywhere;
-}
-
-
-/* text mặc định */
-
-.muted {
-  color: #929da5;
-
-  font-family:
-    "Times New Roman",
-    Times,
-    serif;
-
-  font-size: 15px;
 }
 
 
@@ -792,7 +1040,7 @@ textarea {
 ========================================= */
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 
@@ -801,20 +1049,15 @@ textarea {
 ========================================= */
 
 footer {
-  padding: 25px 25px 10px;
+  padding: 20px 18px 8px;
 
   text-align: center;
 
-  font-family:
-    "Times New Roman",
-    Times,
-    serif;
-
   color: #71818e;
 
-  font-size: 15px;
+  font-size: 13px;
 
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
 
@@ -845,48 +1088,48 @@ footer {
    MOBILE
 ========================================= */
 
-@media (max-width: 600px) {
+@media (max-width:600px) {
 
-  .site {
-    max-width: 100%;
+  .hero-content {
+    width: calc(100% - 25px);
+
+    padding: 25px 15px;
   }
 
 
-  /* Hero */
+  .hero .eyebrow {
+    font-size: 13px;
 
-  .hero-content {
-    width:
-      calc(100% - 25px);
-
-    padding:
-      30px 15px;
+    letter-spacing: 2.5px;
   }
 
 
   .hero h1 {
     font-size:
-      clamp(44px, 14vw, 70px);
+      clamp(43px,14vw,70px);
 
-    letter-spacing: 3px;
+    letter-spacing: 2px;
   }
 
 
-  .hero-content > p:not(.eyebrow) {
-    font-size: 17px;
+  .hero-description {
+    font-size: 16px;
   }
 
 
-  /* Card */
+  .hero-button {
+    width: 100%;
+
+    max-width: 300px;
+  }
+
 
   .card {
-    margin:
-      15px 12px;
+    width: calc(100% - 24px);
 
-    padding:
-      30px 20px;
+    padding: 27px 18px;
 
-    border-radius:
-      22px;
+    border-radius: 22px;
   }
 
 
@@ -895,1835 +1138,187 @@ footer {
   }
 
 
-  /* Info */
-
-  .info {
-    grid-template-columns:
-      1fr;
-
-    gap: 10px;
-  }
-
-
-  .info > div {
-    display: grid;
-
-    grid-template-columns:
-      45px 1fr;
-
-    grid-template-rows:
-      auto auto;
-
-    align-items: center;
-
-    text-align: left;
-
-    padding:
-      14px 16px;
-  }
-
-
-  .info span {
-    grid-row:
-      1 / 3;
-
-    margin: 0;
-
-    text-align: center;
-  }
-
-
-  .info b {
-    margin: 0;
-  }
-
-
-  .info p {
-    margin: 0;
-  }
-
-
-  /* Buttons */
-
-  .gold-btn,
-  .outline-btn {
-    width: 100%;
-  }
-
-
-  /* Form */
-
-  .form input,
-  .form select,
-  .form textarea {
-    font-size: 16px;
-  }
-
-}
-
-
-/* =========================================
-   SMALL PHONE
-========================================= */
-
-@media (max-width: 380px) {
-
-  .hero h1 {
-    font-size: 43px;
-
-    letter-spacing: 2px;
-  }
-
-
-  .card {
-    padding:
-      26px 17px;
-  }
-
-
-  .eyebrow {
-    letter-spacing: 2px;
-  }
-
-}
-```css
-/* =========================================
-   HIỆU ỨNG TRANG BÌA
-========================================= */
-
-/*
-   Ban đầu toàn bộ nội dung chữ và nút
-   được ẩn đi.
-*/
-
-.hero-content {
-  opacity: 1;
-}
-
-
-/* =========================================
-   THƯ MỜI
-========================================= */
-
-.hero-eyebrow {
-  opacity: 0;
-
-  transform: translateY(20px);
-
-  animation:
-    heroFadeUp 1s ease forwards;
-
-  animation-delay: 1.2s;
-}
-
-
-/* =========================================
-   TIÊU ĐỀ
-========================================= */
-
-.hero-title {
-  opacity: 0;
-
-  transform: translateY(25px);
-
-  animation:
-    heroFadeUp 1.2s ease forwards;
-
-  animation-delay: 1.4s;
-}
-
-
-/* =========================================
-   CÂU GIỚI THIỆU
-========================================= */
-
-.hero-description {
-  opacity: 0;
-
-  transform: translateY(20px);
-
-  animation:
-    heroFadeUp 1s ease forwards;
-
-  animation-delay: 2.1s;
-}
-
-
-/* =========================================
-   NÚT MỞ THIỆP
-========================================= */
-
-.hero-button {
-  opacity: 0;
-
-  transform:
-    translateY(20px)
-    scale(0.95);
-
-  animation:
-    heroButtonAppear 1s ease forwards;
-
-  animation-delay: 2.8s;
-}
-
-
-/* =========================================
-   ANIMATION CHUNG
-========================================= */
-
-@keyframes heroFadeUp {
-
-  0% {
-
-    opacity: 0;
-
-    transform:
-      translateY(25px);
-
-  }
-
-  100% {
-
-    opacity: 1;
-
-    transform:
-      translateY(0);
-
-  }
-
-}
-
-
-/* =========================================
-   ANIMATION NÚT
-========================================= */
-
-@keyframes heroButtonAppear {
-
-  0% {
-
-    opacity: 0;
-
-    transform:
-      translateY(25px)
-      scale(0.95);
-
-  }
-
-  100% {
-
-    opacity: 1;
-
-    transform:
-      translateY(0)
-      scale(1);
-
-  }
-
-}
-.hero-img {
-  animation: heroImageZoom 8s ease-out forwards;
-}
-
-@keyframes heroImageZoom {
-
-  from {
-    transform: scale(1.03);
-  }
-
-  to {
-    transform: scale(1.08);
-  }
-
-}
-
-
-/* =========================================
-   LỊCH TỐT NGHIỆP + COUNTDOWN
-========================================= */
-
-.graduation-date {
-  display: grid !important;
-  grid-template-columns: 1fr !important;
-  gap: 16px !important;
-  margin: 28px 0;
-}
-
-
-/* =========================================
-   KHUNG LỊCH
-========================================= */
-
-.calendar-box,
-.countdown-box {
-
-  padding: 24px 18px;
-
-  text-align: center;
-
-  border-radius: 22px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #ffffff,
-      #f4fbff
-    );
-
-  border: 1px solid
-    rgba(58, 167, 232, 0.15);
-
-}
-
-
-/* Icon */
-
-.calendar-icon,
-.countdown-icon {
-
-  display: block;
-
-  margin-bottom: 8px;
-
-  font-size: 34px;
-
-}
-
-
-/* Tiêu đề */
-
-.calendar-box b,
-.countdown-box b {
-
-  display: block;
-
-  margin-bottom: 10px;
-
-  color: var(--blue-dark);
-
-  font-size: 15px;
-
-  letter-spacing: 1px;
-
-}
-
-
-/* =========================================
-   NGÀY
-========================================= */
-
-.calendar-date {
-
-  margin: 4px 0;
-
-  color: #263b4d;
-
-  font-size: 25px !important;
-
-  font-weight: bold;
-
-}
-
-
-.calendar-time {
-
-  margin: 0;
-
-  color: var(--blue-dark) !important;
-
-  font-size: 22px !important;
-
-  font-weight: bold;
-
-}
-
-
-/* =========================================
-   COUNTDOWN
-========================================= */
-
-.countdown {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(4, 1fr);
-
-  gap: 8px;
-
-  margin-top: 15px;
-
-}
-
-
-.countdown > div {
-
-  padding: 12px 5px;
-
-  border-radius: 14px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #ffffff,
-      #eaf7ff
-    );
-
-  border: 1px solid
-    rgba(58, 167, 232, 0.12);
-
-}
-
-
-.countdown strong {
-
-  display: block;
-
-  color: var(--blue-dark);
-
-  font-size: 25px;
-
-  line-height: 1.1;
-
-}
-
-
-.countdown small {
-
-  display: block;
-
-  margin-top: 5px;
-
-  color: var(--muted);
-
-  font-size: 10px;
-
-  font-weight: bold;
-
-}
-
-
-/* =========================================
-   KHI ĐÃ ĐẾN NGÀY
-========================================= */
-
-.countdown-finished {
-
-  padding: 15px;
-
-  color: var(--blue-dark);
-
-  font-size: 20px;
-
-  font-weight: bold;
-
-}
-
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 600px) {
-
-  .calendar-date {
-
-    font-size: 22px !important;
-
-  }
-
-  .calendar-time {
-
-    font-size: 20px !important;
-
-  }
-
-  .countdown {
-
-    gap: 5px;
-
-  }
-
-  .countdown > div {
-
-    padding: 10px 3px;
-
-  }
-
-  .countdown strong {
-
-    font-size: 20px;
-
-  }
-
-  .countdown small {
-
-    font-size: 9px;
-
-  }
-
-}
-/* =========================================
-   THÔNG TIN BUỔI TIỆC - DẠNG DỌC
-========================================= */
-
-.graduation-date {
-  display: flex !important;
-
-  flex-direction: column;
-
-  gap: 16px;
-
-  margin: 28px 0;
-}
-
-
-/* =========================================
-   TỪNG KHỐI THÔNG TIN
-========================================= */
-
-.event-info-item {
-
-  width: 100%;
-
-  padding: 24px 20px;
-
-  text-align: center;
-
-  border-radius: 22px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #ffffff,
-      #f4fbff
-    );
-
-  border: 1px solid
-    rgba(58, 167, 232, 0.13);
-
-  box-shadow:
-    0 6px 18px
-    rgba(58, 167, 232, 0.07);
-
-}
-
-
-/* =========================================
-   ICON
-========================================= */
-
-.event-info-item > span {
-
-  display: block;
-
-  margin-bottom: 8px;
-
-  font-size: 34px;
-
-}
-
-
-/* =========================================
-   TIÊU ĐỀ
-========================================= */
-
-.event-info-item > b {
-
-  display: block;
-
-  margin-bottom: 10px;
-
-  color: var(--blue-dark);
-
-  font-size: 15px;
-
-  letter-spacing: 1px;
-
-}
-
-
-/* =========================================
-   NỘI DUNG
-========================================= */
-
-.event-info-item > p {
-
-  margin: 5px 0;
-
-  color: var(--muted);
-
-  font-size: 16px;
-
-}
-
-
-/* =========================================
-   NGÀY
-========================================= */
-
-.calendar-date {
-
-  color: #263b4d !important;
-
-  font-size: 25px !important;
-
-  font-weight: bold;
-
-}
-
-
-.calendar-time {
-
-  color: var(--blue-dark) !important;
-
-  font-size: 22px !important;
-
-  font-weight: bold;
-
-}
-
-
-/* =========================================
-   COUNTDOWN
-========================================= */
-
-.countdown {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(4, 1fr);
-
-  gap: 8px;
-
-  margin-top: 15px;
-
-}
-
-
-.countdown > div {
-
-  padding: 12px 5px;
-
-  border-radius: 14px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #ffffff,
-      #eaf7ff
-    );
-
-  border: 1px solid
-    rgba(58, 167, 232, 0.12);
-
-}
-
-
-.countdown strong {
-
-  display: block;
-
-  color: var(--blue-dark);
-
-  font-size: 24px;
-
-  line-height: 1.1;
-
-}
-
-
-.countdown small {
-
-  display: block;
-
-  margin-top: 5px;
-
-  color: var(--muted);
-
-  font-size: 10px;
-
-  font-weight: bold;
-
-}
-
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 600px) {
-
-  .event-info-item {
-
-    padding: 22px 16px;
-
-  }
-
-
-  .calendar-date {
-
-    font-size: 22px !important;
-
-  }
-
-
-  .calendar-time {
-
-    font-size: 20px !important;
-
-  }
-
-
-  .countdown {
-
-    gap: 5px;
-
-  }
-
-
-  .countdown > div {
-
-    padding: 10px 3px;
-
-  }
-
-
-  .countdown strong {
-
-    font-size: 20px;
-
-  }
-
-
-  .countdown small {
-
-    font-size: 9px;
-
-  }
-
-}
-```css
-/* =========================================
-   MOBILE FIRST - THIỆP TỐT NGHIỆP
-   Tối ưu cho điện thoại
-========================================= */
-
-
-/* =========================================
-   1. CHỐNG TRÀN NGANG
-========================================= */
-
-html,
-body {
-
-  width: 100%;
-
-  max-width: 100%;
-
-  overflow-x: hidden;
-
-}
-
-
-body {
-
-  -webkit-text-size-adjust: 100%;
-
-}
-
-
-/* =========================================
-   2. KHUNG CHÍNH
-========================================= */
-
-.site {
-
-  width: 100%;
-
-  max-width: 760px;
-
-  margin: 0 auto;
-
-  padding-bottom: 30px;
-
-}
-
-
-/* =========================================
-   3. TRANG BÌA
-========================================= */
-
-.hero {
-
-  position: relative;
-
-  width: 100%;
-
-  min-height: 100svh;
-
-  height: 100svh;
-
-  overflow: hidden;
-
-}
-
-
-/* Ảnh nền */
-
-.hero-img {
-
-  width: 100%;
-
-  height: 100%;
-
-  object-fit: cover;
-
-  object-position: center;
-
-}
-
-
-/* Lớp phủ */
-
-.hero-overlay {
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(16, 119, 180, 0.08),
-      rgba(15, 87, 135, 0.52)
-    );
-
-}
-
-
-/* =========================================
-   4. NỘI DUNG TRANG BÌA
-========================================= */
-
-.hero-content {
-
-  width: calc(100% - 32px);
-
-  max-width: 520px;
-
-  padding: 25px 16px;
-
-}
-
-
-/* Dòng THƯ MỜI */
-
-.hero .eyebrow {
-
-  margin-bottom: 12px;
-
-  font-size: 13px;
-
-  letter-spacing: 2.5px;
-
-}
-
-
-/* Tiêu đề */
-
-.hero h1 {
-
-  margin: 8px 0 18px;
-
-  font-size:
-    clamp(43px, 13vw, 70px);
-
-  line-height: 0.95;
-
-  letter-spacing: 2px;
-
-}
-
-
-/* Mô tả */
-
-.hero-content > p:not(.eyebrow) {
-
-  width: 100%;
-
-  margin-bottom: 25px;
-
-  font-size: 16px;
-
-  line-height: 1.5;
-
-}
-
-
-/* =========================================
-   5. NÚT TRANG BÌA
-========================================= */
-
-.hero-button {
-
-  width: 100%;
-
-  max-width: 300px;
-
-  min-height: 52px;
-
-  padding: 13px 24px;
-
-  font-size: 15px;
-
-}
-
-
-/* =========================================
-   6. CARD
-========================================= */
-
-.card {
-
-  width: calc(100% - 24px);
-
-  margin: 14px auto;
-
-  padding: 27px 18px;
-
-  border-radius: 22px;
-
-}
-
-
-/* =========================================
-   7. TIÊU ĐỀ CARD
-========================================= */
-
-.card h2 {
-
-  margin-bottom: 20px;
-
-  font-size:
-    clamp(26px, 7vw, 34px);
-
-  line-height: 1.2;
-
-}
-
-
-/* =========================================
-   8. THÔNG TIN BUỔI TIỆC
-========================================= */
-
-.graduation-date {
-
-  display: flex !important;
-
-  flex-direction: column;
-
-  gap: 12px;
-
-  margin: 22px 0;
-
-}
-
-
-/* Từng khối */
-
-.event-info-item {
-
-  width: 100%;
-
-  padding: 22px 15px;
-
-  border-radius: 19px;
-
-}
-
-
-/* Icon */
-
-.event-info-item > span {
-
-  margin-bottom: 7px;
-
-  font-size: 30px;
-
-}
-
-
-/* Tiêu đề */
-
-.event-info-item > b {
-
-  margin-bottom: 8px;
-
-  font-size: 14px;
-
-  letter-spacing: 0.7px;
-
-}
-
-
-/* Nội dung */
-
-.event-info-item > p {
-
-  font-size: 15px;
-
-  line-height: 1.5;
-
-}
-
-
-/* =========================================
-   9. NGÀY TỐT NGHIỆP
-========================================= */
-
-.calendar-date {
-
-  font-size: 22px !important;
-
-  line-height: 1.3;
-
-}
-
-
-.calendar-time {
-
-  font-size: 20px !important;
-
-}
-
-
-/* =========================================
-   10. COUNTDOWN
-========================================= */
-
-.countdown {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(4, 1fr);
-
-  gap: 5px;
-
-  width: 100%;
-
-  margin-top: 13px;
-
-}
-
-
-.countdown > div {
-
-  min-width: 0;
-
-  padding: 10px 2px;
-
-  border-radius: 11px;
-
-}
-
-
-.countdown strong {
-
-  font-size: 19px;
-
-}
-
-
-.countdown small {
-
-  margin-top: 4px;
-
-  font-size: 8px;
-
-  letter-spacing: 0;
-
-}
-
-
-/* =========================================
-   11. GOOGLE MAPS
-========================================= */
-
-.link-btn {
-
-  display: flex;
-
-  width: 100%;
-
-  min-height: 50px;
-
-  margin-bottom: 10px;
-
-  padding: 12px 15px;
-
-  text-align: center;
-
-  font-size: 14px;
-
-}
-
-
-/* =========================================
-   12. CÁC NÚT
-========================================= */
-
-.gold-btn,
-.outline-btn {
-
-  width: 100%;
-
-  min-height: 50px;
-
-  padding: 12px 18px;
-
-  font-size: 14px;
-
-}
-
-
-/* Không để nút quá sát nhau */
-
-.outline-btn {
-
-  margin-top: 12px;
-
-}
-
-
-/* =========================================
-   13. FORM
-========================================= */
-
-.form {
-
-  gap: 7px;
-
-}
-
-
-/* Label */
-
-.form label {
-
-  margin-top: 9px;
-
-  font-size: 15px;
-
-}
-
-
-/* Input */
-
-.form input,
-.form select,
-.form textarea {
-
-  width: 100%;
-
-  min-height: 50px;
-
-  padding: 13px 14px;
-
-  border-radius: 13px;
-
-  font-size: 16px;
-
-}
-
-
-/* Textarea */
-
-.form textarea {
-
-  min-height: 120px;
-
-}
-
-
-/* =========================================
-   14. CÂU HỎI PHỤ
-========================================= */
-
-.question {
-
-  margin-top: 14px;
-
-  padding: 15px;
-
-  border-radius: 14px;
-
-}
-
-
-/* =========================================
-   15. RSVP
-========================================= */
-
-#rsvp {
-
-  scroll-margin-top: 10px;
-
-}
-
-
-/* =========================================
-   16. LỜI CHÚC
-========================================= */
-
-#wish {
-
-  scroll-margin-top: 10px;
-
-}
-
-
-#wishThanks {
-
-  scroll-margin-top: 10px;
-
-}
-
-
-.wish-item {
-
-  padding: 15px 16px;
-
-  border-radius: 13px;
-
-}
-
-
-.wish-item strong {
-
-  font-size: 15px;
-
-}
-
-
-.wish-item p {
-
-  font-size: 14px;
-
-  line-height: 1.6;
-
-}
-
-
-/* =========================================
-   17. STATUS
-========================================= */
-
-.status {
-
-  margin-top: 13px;
-
-  font-size: 14px;
-
-  line-height: 1.5;
-
-}
-
-
-/* =========================================
-   18. FOOTER
-========================================= */
-
-footer {
-
-  padding:
-
-    20px 18px 8px;
-
-  font-size: 13px;
-
-  line-height: 1.6;
-
-}
-
-
-/* =========================================
-   19. ĐIỆN THOẠI NHỎ
-   <= 380px
-========================================= */
-
-@media (max-width: 380px) {
-
-  .hero-content {
-
-    width: calc(100% - 24px);
-
-    padding: 20px 12px;
-
-  }
-
-
-  .hero h1 {
-
-    font-size: 42px;
-
-    letter-spacing: 1px;
-
-  }
-
-
-  .hero-content > p:not(.eyebrow) {
-
-    font-size: 15px;
-
-  }
-
-
-  .card {
-
-    width: calc(100% - 20px);
-
-    padding: 25px 15px;
-
-  }
-
-
-  .card h2 {
-
-    font-size: 25px;
-
-  }
-
-
-  .event-info-item {
-
-    padding: 19px 13px;
-
-  }
-
-
-  .calendar-date {
-
-    font-size: 20px !important;
-
-  }
-
-
-  .countdown strong {
-
-    font-size: 17px;
-
-  }
-
-
-  .countdown small {
-
-    font-size: 7px;
-
-  }
-
-}
-
-
-/* =========================================
-   20. ĐIỆN THOẠI RẤT HẸP
-   <= 340px
-========================================= */
-
-@media (max-width: 340px) {
-
-  .hero h1 {
-
-    font-size: 38px;
-
-  }
-
-
-  .countdown {
-
-    gap: 3px;
-
-  }
-
-
-  .countdown strong {
-
-    font-size: 16px;
-
-  }
-
-
-  .countdown small {
-
-    font-size: 7px;
-
-  }
-
-}
-
-
-/* =========================================
-   21. THIẾT BỊ MÀN HÌNH CAO
-========================================= */
-
-@media (max-width: 600px)
-       and (min-height: 750px) {
-
-  .hero-content {
-
-    padding-top: 30px;
-
-    padding-bottom: 30px;
-
-  }
-
-}
-
-
-/* =========================================
-   22. THIẾT BỊ MÀN HÌNH THẤP
-========================================= */
-
-@media (max-width: 600px)
-       and (max-height: 700px) {
-
-  .hero-content {
-
-    padding-top: 15px;
-
-    padding-bottom: 15px;
-
-  }
-
-
-  .hero .eyebrow {
-
-    margin-bottom: 7px;
-
-  }
-
-
-  .hero h1 {
-
-    margin: 5px 0 12px;
-
-  }
-
-
-  .hero-content > p:not(.eyebrow) {
-
-    margin-bottom: 15px;
-
-  }
-
-}
-/* Sửa lỗi hiển thị khối thông tin */
-.event-info-item {
-  width: 100% !important;
-  box-sizing: border-box;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-}
-
-/* Căn chỉnh hàng Tiêu đề + Icon */
-.item-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-  width: 100%;
-}
-
-.item-header b {
-  font-size: 0.95rem;
-  letter-spacing: 0.5px;
-  word-break: normal;
-}
-
-/* Căn chỉnh phần nội dung chữ bên dưới */
-.item-body {
-  width: 100%;
-  padding-left: 28px; /* Lùi lề bằng với icon */
-  box-sizing: border-box;
-}
-
-/* Sửa triệt để lỗi rớt dòng từng chữ ở địa chỉ */
-.item-body p, 
-.location-address, 
-.location-title {
-  width: 100% !important;
-  display: block !important;
-  white-space: normal !important;
-  word-break: keep-all !important; /* Không tự xé lẻ từ */
-  overflow-wrap: break-word !important;
-  margin: 4px 0;
-  line-height: 1.5;
-}
-/* Tối ưu tiêu đề trên Mobile */
-.item-header b {
-  font-size: 0.85rem !important; /* Thu nhỏ phông chữ vừa vặn màn hình nhỏ */
-  white-space: nowrap !important; /* Ép tiêu đề luôn nằm trên 1 dòng */
-  letter-spacing: 0px !important; /* Thu hẹp khoảng cách chữ */
-  text-transform: uppercase;
-}
-
-/* Đảm bảo icon và tiêu đề nằm ngang hàng chuẩn */
-.item-header {
-  display: flex !important;
-  align-items: center !important;
-  gap: 6px !important; /* Giảm khoảng cách giữa icon và chữ */
-  width: 100% !important;
-}
-
-/* Nếu tiêu đề chính H2 bị rớt dòng */
-h2 {
-  font-size: 1.3rem !important;
-  white-space: normal;
-  line-height: 1.3;
-}
-
-/* Khối tổng thể mỗi phần */
-.event-info-item {
-  width: 100% !important;
-  display: flex !important;
-  flex-direction: column !important; /* Xếp chồng chiều dọc */
-  align-items: center !important;     /* Căn giữa toàn bộ */
-  text-align: center !important;
-  margin-bottom: 24px !important;
-  box-sizing: border-box !important;
-}
-
-/* Dòng 1: Icon */
-.item-icon {
-  font-size: 1.5rem !important;
-  margin-bottom: 4px !important;
-  display: block !important;
-}
-
-/* Dòng 2: Tiêu đề (Nằm riêng 1 dòng trên nội dung) */
-.item-title {
-  width: 100% !important;
-  font-weight: bold !important;
-  font-size: 0.9rem !important;
-  color: #1a365d; /* Thay đổi màu chữ nếu cần */
-  text-transform: uppercase !important;
-  margin-bottom: 8px !important;
-  white-space: normal !important;
-  word-break: keep-all !important;
-  display: block !important;
-}
-
-/* Dòng 3: Nội dung */
-.item-content {
-  width: 100% !important;
-  display: block !important;
-}
-
-.item-content p {
-  width: 100% !important;
-  margin: 3px 0 !important;
-  white-space: normal !important;
-  word-break: keep-all !important;
-  overflow-wrap: break-word !important;
-  font-size: 0.95rem !important;
-  line-height: 1.4 !important;
-}
-/* 1. Tăng khoảng cách giữa các KHỐI MỤC LỚN (Ngày, Đếm ngược, Địa điểm) */
-.event-info-item {
-  width: 100% !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  text-align: center !important;
-  margin-bottom: 36px !important; /* Tăng khoảng cách giữa các mục lớn (cũ là 24px) */
-  padding: 12px 0 !important;      /* Tạo thêm khoảng trống đệm trên dưới */
-  box-sizing: border-box !important;
-}
-
-/* 2. Khoảng cách dưới Icon */
-.item-icon {
-  font-size: 1.8rem !important;
-  margin-bottom: 10px !important; /* Tạo khoảng trống giữa icon và tiêu đề */
-  display: block !important;
-}
-
-/* 3. Khoảng cách dưới Tiêu đề */
-.item-title {
-  width: 100% !important;
-  font-weight: bold !important;
-  font-size: 0.95rem !important;
-  color: #1a365d;
-  text-transform: uppercase !important;
-  margin-bottom: 14px !important; /* Tạo khoảng trống rõ ràng giữa tiêu đề và nội dung */
-  white-space: normal !important;
-  word-break: keep-all !important;
-  display: block !important;
-}
-
-/* 4. Khoảng cách giữa các DÒNG NỘI DUNG bên trong (Tên trường, Địa chỉ) */
-.item-content p {
-  width: 100% !important;
-  margin: 6px 0 !important;      /* Tăng khoảng cách giữa dòng tên trường và dòng địa chỉ */
-  white-space: normal !important;
-  word-break: keep-all !important;
-  overflow-wrap: break-word !important;
-  font-size: 1rem !important;
-  line-height: 1.6 !important;     /* Tăng chiều cao dòng giúp chữ thoáng hơn */
-}
-
-```css
-/* =========================================
-   THÔNG TIN CÁ NHÂN
-========================================= */
-
-.profile-card {
-
-  text-align: center;
-
-}
-
-
-/* =========================================
-   ẢNH CÁ NHÂN
-========================================= */
-
-.profile-photo {
-
-  width: 150px;
-
-  height: 150px;
-
-  margin: 10px auto 18px;
-
-  border-radius: 50%;
-
-  padding: 5px;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--blue),
-      var(--yellow),
-      var(--pink)
-    );
-
-  box-shadow:
-    0 10px 25px
-    rgba(58, 167, 232, 0.18);
-
-}
-
-
-.profile-photo img {
-
-  width: 100%;
-
-  height: 100%;
-
-  display: block;
-
-  object-fit: cover;
-
-  border-radius: 50%;
-
-  border: 4px solid white;
-
-}
-
-
-/* =========================================
-   TÊN
-========================================= */
-
-.profile-name {
-
-  margin: 5px 0 20px;
-
-  color: #263b4d;
-
-  font-size:
-    clamp(24px, 7vw, 32px);
-
-  letter-spacing: 1px;
-
-}
-
-
-/* =========================================
-   THÔNG TIN
-========================================= */
-
-.profile-info {
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 10px;
-
-  text-align: left;
-
-}
-
-
-.profile-info > div {
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 14px;
-
-  padding: 14px;
-
-  border-radius: 15px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #f0faff,
-      #fffdf4
-    );
-
-  border: 1px solid
-    rgba(58, 167, 232, 0.12);
-
-}
-
-
-.profile-info > div > span {
-
-  flex: 0 0 38px;
-
-  width: 38px;
-
-  height: 38px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  font-size: 23px;
-
-}
-
-
-.profile-info b {
-
-  display: block;
-
-  margin-bottom: 2px;
-
-  color: var(--blue-dark);
-
-  font-size: 14px;
-
-}
-
-
-.profile-info p {
-
-  margin: 0;
-
-  color: var(--muted);
-
-  font-size: 15px;
-
-  line-height: 1.4;
-
-}
-
-
-/* =========================================
-   LỜI NHẮN
-========================================= */
-
-.profile-message {
-
-  margin-top: 20px;
-
-  padding: 18px;
-
-  border-radius: 18px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff9dd,
-      #fff
-    );
-
-  border-left: 4px solid
-    var(--yellow);
-
-}
-
-
-.profile-message p {
-
-  margin: 0;
-
-  color: #68737c;
-
-  font-size: 15px;
-
-  font-style: italic;
-
-  line-height: 1.7;
-
-}
-
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 600px) {
-
   .profile-photo {
-
     width: 135px;
-
     height: 135px;
-
   }
 
 
   .profile-name {
-
-    font-size: 25px;
-
+    font-size: 25px !important;
   }
 
 
   .profile-info > div {
-
     padding: 12px;
-
   }
 
 
   .profile-info > div > span {
-
     flex-basis: 34px;
 
     width: 34px;
-
     height: 34px;
 
     font-size: 21px;
-
   }
 
 
   .profile-info p {
+    font-size: 14px;
+  }
+
+
+  .event-info-item {
+    padding: 22px 16px;
+  }
+
+
+  .calendar-date {
+    font-size: 22px !important;
+  }
+
+
+  .calendar-time {
+    font-size: 20px !important;
+  }
+
+
+  .countdown {
+    gap: 5px;
+  }
+
+
+  .countdown strong {
+    font-size: 20px;
+  }
+
+
+  .countdown small {
+    font-size: 8px;
+  }
+
+
+  .gold-btn,
+  .outline-btn {
+    width: 100%;
+
+    min-height: 50px;
 
     font-size: 14px;
-
   }
 
 }
-```
+
+
+/* =========================================
+   ĐIỆN THOẠI NHỎ
+========================================= */
+
+@media (max-width:380px) {
+
+  .hero-content {
+    width: calc(100% - 24px);
+
+    padding: 20px 12px;
+  }
+
+
+  .hero h1 {
+    font-size: 42px;
+
+    letter-spacing: 1px;
+  }
+
+
+  .hero-description {
+    font-size: 15px;
+  }
+
+
+  .card {
+    width: calc(100% - 20px);
+
+    padding: 25px 15px;
+  }
+
+
+  .card h2 {
+    font-size: 25px;
+  }
+
+
+  .event-info-item {
+    padding: 19px 13px;
+  }
+
+
+  .calendar-date {
+    font-size: 20px !important;
+  }
+
+
+  .countdown strong {
+    font-size: 17px;
+  }
+
+
+  .countdown small {
+    font-size: 7px;
+  }
+
+}
+
+
+/* =========================================
+   ĐIỆN THOẠI RẤT HẸP
+========================================= */
+
+@media (max-width:340px) {
+
+  .hero h1 {
+    font-size: 38px;
+  }
+
+
+  .countdown {
+    gap: 3px;
+  }
+
+
+  .countdown strong {
+    font-size: 16px;
+  }
+
+}
+
+
+/* =========================================
+   MÀN HÌNH THẤP
+========================================= */
+
+@media (max-width:600px)
+       and (max-height:700px) {
+
+  .hero-content {
+    padding-top: 15px;
+
+    padding-bottom: 15px;
+  }
+
+
+  .hero .eyebrow {
+    margin-bottom: 7px;
+  }
+
+
+  .hero h1 {
+    margin: 5px 0 12px;
+  }
+
+
+  .hero-description {
+    margin-bottom: 15px;
+  }
+
+}
