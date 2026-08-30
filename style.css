@@ -1363,3 +1363,244 @@ footer {
   }
 
 }
+/* =========================================
+   THÔNG TIN BUỔI TIỆC - DẠNG DỌC
+========================================= */
+
+.graduation-date {
+  display: flex !important;
+
+  flex-direction: column;
+
+  gap: 16px;
+
+  margin: 28px 0;
+}
+
+
+/* =========================================
+   TỪNG KHỐI THÔNG TIN
+========================================= */
+
+.event-info-item {
+
+  width: 100%;
+
+  padding: 24px 20px;
+
+  text-align: center;
+
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f4fbff
+    );
+
+  border: 1px solid
+    rgba(58, 167, 232, 0.13);
+
+  box-shadow:
+    0 6px 18px
+    rgba(58, 167, 232, 0.07);
+
+}
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.event-info-item > span {
+
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 34px;
+
+}
+
+
+/* =========================================
+   TIÊU ĐỀ
+========================================= */
+
+.event-info-item > b {
+
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: var(--blue-dark);
+
+  font-size: 15px;
+
+  letter-spacing: 1px;
+
+}
+
+
+/* =========================================
+   NỘI DUNG
+========================================= */
+
+.event-info-item > p {
+
+  margin: 5px 0;
+
+  color: var(--muted);
+
+  font-size: 16px;
+
+}
+
+
+/* =========================================
+   NGÀY
+========================================= */
+
+.calendar-date {
+
+  color: #263b4d !important;
+
+  font-size: 25px !important;
+
+  font-weight: bold;
+
+}
+
+
+.calendar-time {
+
+  color: var(--blue-dark) !important;
+
+  font-size: 22px !important;
+
+  font-weight: bold;
+
+}
+
+
+/* =========================================
+   COUNTDOWN
+========================================= */
+
+.countdown {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 8px;
+
+  margin-top: 15px;
+
+}
+
+
+.countdown > div {
+
+  padding: 12px 5px;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #eaf7ff
+    );
+
+  border: 1px solid
+    rgba(58, 167, 232, 0.12);
+
+}
+
+
+.countdown strong {
+
+  display: block;
+
+  color: var(--blue-dark);
+
+  font-size: 24px;
+
+  line-height: 1.1;
+
+}
+
+
+.countdown small {
+
+  display: block;
+
+  margin-top: 5px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+  font-weight: bold;
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .event-info-item {
+
+    padding: 22px 16px;
+
+  }
+
+
+  .calendar-date {
+
+    font-size: 22px !important;
+
+  }
+
+
+  .calendar-time {
+
+    font-size: 20px !important;
+
+  }
+
+
+  .countdown {
+
+    gap: 5px;
+
+  }
+
+
+  .countdown > div {
+
+    padding: 10px 3px;
+
+  }
+
+
+  .countdown strong {
+
+    font-size: 20px;
+
+  }
+
+
+  .countdown small {
+
+    font-size: 9px;
+
+  }
+
+}
