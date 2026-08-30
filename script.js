@@ -1,3 +1,4 @@
+```javascript
 // =============================
 // GOOGLE FORM
 // =============================
@@ -12,6 +13,14 @@ const ENTRY_WISH = "entry.1647574086";
 
 
 // =============================
+// TRẠNG THÁI RSVP
+// =============================
+
+// Ban đầu chưa xác nhận
+let rsvpConfirmed = false;
+
+
+// =============================
 // HIỂN THỊ SECTION
 // =============================
 
@@ -19,20 +28,66 @@ function showSection(id) {
 
   const el = document.getElementById(id);
 
-  if (el) {
+  if (!el) return;
 
-    el.classList.remove("hidden");
 
-    setTimeout(() => {
+  // =====================================
+  // BẢO VỆ PHẦN GỬI LỜI CHÚC
+  // =====================================
 
-      el.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+  // Nếu chưa xác nhận RSVP
+  // thì không cho mở phần lời chúc
 
-    }, 30);
+  if (id === "wish" && !rsvpConfirmed) {
 
+    const status =
+      document.getElementById("rsvpStatus");
+
+    if (status) {
+
+      status.textContent =
+        "Vui lòng xác nhận tham dự trước khi gửi lời chúc.";
+
+    }
+
+    // Hiện phần RSVP để người dùng xác nhận
+    const rsvp =
+      document.getElementById("rsvp");
+
+    if (rsvp) {
+
+      rsvp.classList.remove("hidden");
+
+      setTimeout(() => {
+
+        rsvp.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }, 30);
+
+    }
+
+    return;
   }
+
+
+  // =====================================
+  // HIỂN THỊ SECTION BÌNH THƯỜNG
+  // =====================================
+
+  el.classList.remove("hidden");
+
+  setTimeout(() => {
+
+    el.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+  }, 30);
+
 }
 
 
@@ -42,6 +97,7 @@ function showSection(id) {
 
 const QUESTIONS = [];
 
+
 function renderQuestions() {
 
   const box =
@@ -49,7 +105,9 @@ function renderQuestions() {
 
   if (!box) return;
 
+
   box.innerHTML = "";
+
 
   QUESTIONS.forEach((q, i) => {
 
@@ -57,6 +115,7 @@ function renderQuestions() {
       document.createElement("div");
 
     wrap.className = "question";
+
 
     wrap.innerHTML = `
       <label>
@@ -71,11 +130,17 @@ function renderQuestions() {
       >
     `;
 
+
     box.appendChild(wrap);
 
   });
+
 }
 
+
+// =============================
+// BẢO VỆ HTML
+// =============================
 
 function escapeHtml(s) {
 
@@ -94,7 +159,46 @@ function escapeHtml(s) {
 
 
 function escapeAttr(s) {
+
   return escapeHtml(s);
+
+}
+
+
+// =============================
+// HIỆN NÚT GỬI LỜI CHÚC
+// =============================
+
+function showWishButton() {
+
+  const wishButton =
+    document.getElementById("wishButton");
+
+  if (!wishButton) return;
+
+
+  // Đánh dấu đã xác nhận RSVP
+  rsvpConfirmed = true;
+
+
+  // Hiện nút
+  wishButton.classList.remove("hidden");
+
+
+  // Đảm bảo display không bị CSS khác ghi đè
+  wishButton.style.display = "block";
+
+
+  // Cuộn nhẹ tới nút
+  setTimeout(() => {
+
+    wishButton.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+
+  }, 300);
+
 }
 
 
@@ -117,6 +221,10 @@ function setupRSVP() {
       e.preventDefault();
 
 
+      // =========================
+      // LẤY INPUT
+      // =========================
+
       const nameInput =
         rsvp.querySelector(
           'input[name="name"]'
@@ -133,6 +241,10 @@ function setupRSVP() {
         );
 
 
+      // =========================
+      // KIỂM TRA INPUT
+      // =========================
+
       if (!nameInput ||
           !attendanceInput) {
 
@@ -147,7 +259,9 @@ function setupRSVP() {
       }
 
 
-      // Kiểm tra họ tên
+      // =========================
+      // KIỂM TRA HỌ TÊN
+      // =========================
 
       if (!nameInput.value.trim()) {
 
@@ -157,7 +271,9 @@ function setupRSVP() {
       }
 
 
-      // Kiểm tra tham dự
+      // =========================
+      // KIỂM TRA THAM DỰ
+      // =========================
 
       if (!attendanceInput.value) {
 
@@ -167,7 +283,20 @@ function setupRSVP() {
       }
 
 
-      // Đổi tên field
+      // =========================
+      // LƯU TẠM TÊN FIELD
+      // =========================
+
+      const originalName =
+        nameInput.name;
+
+      const originalAttendance =
+        attendanceInput.name;
+
+
+      // =========================
+      // ĐỔI TÊN FIELD
+      // =========================
 
       nameInput.name =
         ENTRY_NAME;
@@ -176,7 +305,9 @@ function setupRSVP() {
         ENTRY_ATTENDANCE;
 
 
-      // Gửi Google Form
+      // =========================
+      // GỬI GOOGLE FORM
+      // =========================
 
       rsvp.action =
         FORM_URL;
@@ -188,10 +319,13 @@ function setupRSVP() {
         "submitFrame";
 
 
+      // Submit
       rsvp.submit();
 
 
-      // Thông báo
+      // =========================
+      // THÔNG BÁO
+      // =========================
 
       if (status) {
 
@@ -201,15 +335,48 @@ function setupRSVP() {
       }
 
 
-      // Khôi phục
+      // =========================
+      // HIỆN NÚT GỬI LỜI CHÚC
+      // =========================
+
+      // Không phân biệt Có / Không
+      // Cả hai lựa chọn đều được gửi lời chúc
+
+      showWishButton();
+
+
+      // =========================
+      // ĐỔI NÚT XÁC NHẬN
+      // =========================
+
+      const submitButton =
+        rsvp.querySelector(
+          'button[type="submit"]'
+        );
+
+
+      if (submitButton) {
+
+        submitButton.disabled =
+          true;
+
+        submitButton.textContent =
+          "✓ ĐÃ XÁC NHẬN";
+
+      }
+
+
+      // =========================
+      // KHÔI PHỤC FIELD
+      // =========================
 
       setTimeout(() => {
 
         nameInput.name =
-          "name";
+          originalName;
 
         attendanceInput.name =
-          "attendance";
+          originalAttendance;
 
       }, 500);
 
@@ -240,6 +407,32 @@ function setupWish() {
       e.preventDefault();
 
 
+      // =========================
+      // KIỂM TRA RSVP
+      // =========================
+
+      if (!rsvpConfirmed) {
+
+        const status =
+          document.getElementById(
+            "wishStatus"
+          );
+
+        if (status) {
+
+          status.textContent =
+            "Vui lòng xác nhận tham dự trước.";
+
+        }
+
+        return;
+      }
+
+
+      // =========================
+      // LẤY INPUT
+      // =========================
+
       const nameInput =
         wish.querySelector(
           'input[name="name"]'
@@ -262,7 +455,7 @@ function setupWish() {
 
 
       // =========================
-      // KIỂM TRA
+      // KIỂM TRA INPUT
       // =========================
 
       if (!nameInput ||
@@ -279,7 +472,9 @@ function setupWish() {
       }
 
 
-      // Kiểm tra họ tên
+      // =========================
+      // KIỂM TRA HỌ TÊN
+      // =========================
 
       if (!nameInput.value.trim()) {
 
@@ -289,7 +484,9 @@ function setupWish() {
       }
 
 
-      // Kiểm tra lời chúc
+      // =========================
+      // KIỂM TRA LỜI CHÚC
+      // =========================
 
       if (!wishInput.value.trim()) {
 
@@ -297,6 +494,17 @@ function setupWish() {
 
         return;
       }
+
+
+      // =========================
+      // LƯU TÊN FIELD GỐC
+      // =========================
+
+      const originalName =
+        nameInput.name;
+
+      const originalWish =
+        wishInput.name;
 
 
       // =========================
@@ -345,18 +553,15 @@ function setupWish() {
 
       if (thanks) {
 
-        // Xóa trạng thái ẩn
         thanks.classList.remove(
           "hidden"
         );
 
 
-        // Đảm bảo hiển thị
         thanks.style.display =
           "block";
 
 
-        // Cuộn tới phần cảm ơn
         setTimeout(() => {
 
           thanks.scrollIntoView({
@@ -397,10 +602,10 @@ function setupWish() {
       setTimeout(() => {
 
         nameInput.name =
-          "name";
+          originalName;
 
         wishInput.name =
-          "wish";
+          originalWish;
 
       }, 500);
 
@@ -426,3 +631,4 @@ document.addEventListener(
 
   }
 );
+```
