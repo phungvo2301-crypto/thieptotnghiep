@@ -2315,4 +2315,48 @@ footer {
   }
 
 }
+/* Sửa lỗi hiển thị khối thông tin */
+.event-info-item {
+  width: 100% !important;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
 
+/* Căn chỉnh hàng Tiêu đề + Icon */
+.item-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.item-header b {
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  word-break: normal;
+}
+
+/* Căn chỉnh phần nội dung chữ bên dưới */
+.item-body {
+  width: 100%;
+  padding-left: 28px; /* Lùi lề bằng với icon */
+  box-sizing: border-box;
+}
+
+/* Sửa triệt để lỗi rớt dòng từng chữ ở địa chỉ */
+.item-body p, 
+.location-address, 
+.location-title {
+  width: 100% !important;
+  display: block !important;
+  white-space: normal !important;
+  word-break: keep-all !important; /* Không tự xé lẻ từ */
+  overflow-wrap: break-word !important;
+  margin: 4px 0;
+  line-height: 1.5;
+}
