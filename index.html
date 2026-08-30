@@ -1,36 +1,45 @@
 <!doctype html>
+
 <html lang="vi">
 
 <head>
+
   <meta charset="utf-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width,initial-scale=1"
-  >
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1"
+
+>
 
   <title>Lễ Tốt Nghiệp</title>
 
   <link rel="stylesheet" href="style.css">
 
   <script>
+
     /* =====================================
        HIỂN THỊ SECTION
     ===================================== */
 
     function showSection(id) {
-      const section = document.getElementById(id);
+
+      const section =
+        document.getElementById(id);
 
       if (!section) return;
 
       section.classList.remove("hidden");
 
       setTimeout(() => {
+
         section.scrollIntoView({
           behavior: "smooth",
           block: "start"
         });
+
       }, 50);
+
     }
 
 
@@ -64,12 +73,17 @@
 
     function sendToGoogleForm(target, fields) {
 
-      const form = document.createElement("form");
+      const form =
+        document.createElement("form");
 
       form.method = "POST";
+
       form.action = FORM_URL;
+
       form.target = target;
+
       form.style.display = "none";
+
 
       fields.forEach(field => {
 
@@ -77,20 +91,27 @@
           document.createElement("input");
 
         input.type = "hidden";
+
         input.name = field.name;
+
         input.value = field.value;
 
         form.appendChild(input);
 
       });
 
+
       document.body.appendChild(form);
 
       form.submit();
 
+
       setTimeout(() => {
+
         form.remove();
+
       }, 1000);
+
     }
 
 
@@ -98,179 +119,218 @@
        KHI TRANG TẢI XONG
     ===================================== */
 
-    document.addEventListener("DOMContentLoaded", () => {
-
-      /* =================================
-         RSVP
-      ================================= */
-
-      const rsvpForm =
-        document.getElementById("rsvpForm");
-
-      if (rsvpForm) {
-
-        rsvpForm.addEventListener("submit", event => {
-
-          event.preventDefault();
-
-          const nameInput =
-            document.getElementById("rsvpName");
-
-          const attendanceInput =
-            document.getElementById("attendance");
-
-          const status =
-            document.getElementById("rsvpStatus");
-
-          const wishButton =
-            document.getElementById("wishButton");
-
-          const submitButton =
-            document.getElementById("rsvpSubmit");
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
 
 
-          if (!nameInput.value.trim()) {
-            nameInput.focus();
-            return;
-          }
+        /* =================================
+           RSVP
+        ================================= */
+
+        const rsvpForm =
+          document.getElementById("rsvpForm");
 
 
-          if (!attendanceInput.value) {
-            attendanceInput.focus();
-            return;
-          }
+        if (rsvpForm) {
+
+          rsvpForm.addEventListener(
+            "submit",
+            event => {
+
+              event.preventDefault();
 
 
-          const name =
-            nameInput.value.trim();
+              const nameInput =
+                document.getElementById("rsvpName");
 
-          const attendance =
-            attendanceInput.value;
+              const attendanceInput =
+                document.getElementById("attendance");
+
+              const status =
+                document.getElementById("rsvpStatus");
+
+              const wishButton =
+                document.getElementById("wishButton");
+
+              const submitButton =
+                document.getElementById("rsvpSubmit");
 
 
-          sendToGoogleForm("submitFrame", [
-            {
-              name: ENTRY_NAME,
-              value: name
-            },
-            {
-              name: ENTRY_ATTENDANCE,
-              value: attendance
+              if (!nameInput.value.trim()) {
+
+                nameInput.focus();
+
+                return;
+
+              }
+
+
+              if (!attendanceInput.value) {
+
+                attendanceInput.focus();
+
+                return;
+
+              }
+
+
+              const name =
+                nameInput.value.trim();
+
+              const attendance =
+                attendanceInput.value;
+
+
+              sendToGoogleForm(
+                "submitFrame",
+                [
+                  {
+                    name: ENTRY_NAME,
+                    value: name
+                  },
+                  {
+                    name: ENTRY_ATTENDANCE,
+                    value: attendance
+                  }
+                ]
+              );
+
+
+              rsvpConfirmed = true;
+
+
+              status.textContent =
+                "✓ Đã xác nhận tham dự. Cảm ơn bạn!";
+
+
+              wishButton.classList.remove(
+                "hidden"
+              );
+
+
+              submitButton.disabled =
+                true;
+
+
+              submitButton.textContent =
+                "✓ ĐÃ XÁC NHẬN";
+
             }
-          ]);
+          );
+
+        }
 
 
-          rsvpConfirmed = true;
+        /* =================================
+           LỜI CHÚC
+        ================================= */
+
+        const wishForm =
+          document.getElementById("wishForm");
 
 
-          status.textContent =
-            "✓ Đã xác nhận tham dự. Cảm ơn bạn!";
+        if (wishForm) {
+
+          wishForm.addEventListener(
+            "submit",
+            event => {
+
+              event.preventDefault();
 
 
-          wishButton.classList.remove("hidden");
+              if (!rsvpConfirmed) return;
 
 
-          submitButton.disabled = true;
+              const nameInput =
+                document.getElementById("wishName");
 
-          submitButton.textContent =
-            "✓ ĐÃ XÁC NHẬN";
+              const wishInput =
+                document.getElementById("wishText");
 
-        });
+              const status =
+                document.getElementById("wishStatus");
+
+              const thanks =
+                document.getElementById("wishThanks");
+
+              const submitButton =
+                document.getElementById("wishSubmit");
+
+
+              if (!nameInput.value.trim()) {
+
+                nameInput.focus();
+
+                return;
+
+              }
+
+
+              if (!wishInput.value.trim()) {
+
+                wishInput.focus();
+
+                return;
+
+              }
+
+
+              const name =
+                nameInput.value.trim();
+
+              const wish =
+                wishInput.value.trim();
+
+
+              sendToGoogleForm(
+                "wishFrame",
+                [
+                  {
+                    name: ENTRY_NAME,
+                    value: name
+                  },
+                  {
+                    name: ENTRY_WISH,
+                    value: wish
+                  }
+                ]
+              );
+
+
+              status.textContent =
+                "✓ Đã gửi lời chúc. Xin cảm ơn!";
+
+
+              submitButton.disabled =
+                true;
+
+
+              submitButton.textContent =
+                "✓ ĐÃ GỬI LỜI CHÚC";
+
+
+              thanks.classList.remove(
+                "hidden"
+              );
+
+
+              setTimeout(() => {
+
+                thanks.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start"
+                });
+
+              }, 300);
+
+            }
+          );
+
+        }
 
       }
-
-
-      /* =================================
-         LỜI CHÚC
-      ================================= */
-
-      const wishForm =
-        document.getElementById("wishForm");
-
-      if (wishForm) {
-
-        wishForm.addEventListener("submit", event => {
-
-          event.preventDefault();
-
-
-          if (!rsvpConfirmed) return;
-
-
-          const nameInput =
-            document.getElementById("wishName");
-
-          const wishInput =
-            document.getElementById("wishText");
-
-          const status =
-            document.getElementById("wishStatus");
-
-          const thanks =
-            document.getElementById("wishThanks");
-
-          const submitButton =
-            document.getElementById("wishSubmit");
-
-
-          if (!nameInput.value.trim()) {
-            nameInput.focus();
-            return;
-          }
-
-
-          if (!wishInput.value.trim()) {
-            wishInput.focus();
-            return;
-          }
-
-
-          const name =
-            nameInput.value.trim();
-
-          const wish =
-            wishInput.value.trim();
-
-
-          sendToGoogleForm("wishFrame", [
-            {
-              name: ENTRY_NAME,
-              value: name
-            },
-            {
-              name: ENTRY_WISH,
-              value: wish
-            }
-          ]);
-
-
-          status.textContent =
-            "✓ Đã gửi lời chúc. Xin cảm ơn!";
-
-
-          submitButton.disabled = true;
-
-          submitButton.textContent =
-            "✓ ĐÃ GỬI LỜI CHÚC";
-
-
-          thanks.classList.remove("hidden");
-
-
-          setTimeout(() => {
-
-            thanks.scrollIntoView({
-              behavior: "smooth",
-              block: "start"
-            });
-
-          }, 300);
-
-        });
-
-      }
-
-    });
+    );
 
 
     /* =====================================
@@ -288,8 +348,10 @@
       const now =
         new Date().getTime();
 
+
       const distance =
         graduationDate - now;
+
 
       const countdown =
         document.getElementById("countdown");
@@ -312,6 +374,7 @@
         `;
 
         return;
+
       }
 
 
@@ -326,55 +389,66 @@
 
       const hours =
         Math.floor(
-          (distance %
-            (1000 * 60 * 60 * 24)) /
-            (1000 * 60 * 60)
+          (
+            distance %
+            (1000 * 60 * 60 * 24)
+          ) /
+          (1000 * 60 * 60)
         );
 
 
       const minutes =
         Math.floor(
-          (distance %
-            (1000 * 60 * 60)) /
-            (1000 * 60)
+          (
+            distance %
+            (1000 * 60 * 60)
+          ) /
+          (1000 * 60)
         );
 
 
       const seconds =
         Math.floor(
-          (distance %
-            (1000 * 60)) /
-            1000
+          (
+            distance %
+            (1000 * 60)
+          ) /
+          1000
         );
 
 
       document.getElementById("days").textContent =
         String(days).padStart(2, "0");
 
+
       document.getElementById("hours").textContent =
         String(hours).padStart(2, "0");
+
 
       document.getElementById("minutes").textContent =
         String(minutes).padStart(2, "0");
 
+
       document.getElementById("seconds").textContent =
         String(seconds).padStart(2, "0");
+
     }
 
 
     updateCountdown();
 
-    setInterval(updateCountdown, 1000);
+    setInterval(
+      updateCountdown,
+      1000
+    );
 
   </script>
 
 </head>
 
-
 <body>
 
 <main class="site">
-
 
   <!-- =====================================
        TRANG BÌA
@@ -382,41 +456,42 @@
 
   <section class="hero">
 
-    <div class="hero-overlay"></div>
+```
+<div class="hero-overlay"></div>
 
-    <img
-      src="img/graduation.jpg"
-      class="hero-img"
-      alt="Ảnh lễ tốt nghiệp"
-    >
+<img
+  src="img/graduation.jpg"
+  class="hero-img"
+  alt="Ảnh lễ tốt nghiệp"
+>
 
-    <div class="hero-content">
+<div class="hero-content">
 
-      <p class="eyebrow hero-eyebrow">
-        THƯ MỜI
-      </p>
+  <p class="eyebrow hero-eyebrow">
+    THƯ MỜI
+  </p>
 
-      <h1 class="hero-title">
-        LỄ<br>
-        TỐT NGHIỆP
-      </h1>
+  <h1 class="hero-title">
+    LỄ<br>
+    TỐT NGHIỆP
+  </h1>
 
-      <p class="hero-description">
-        Trân trọng kính mời bạn đến tham dự
-      </p>
+  <p class="hero-description">
+    Trân trọng kính mời bạn đến tham dự
+  </p>
 
-      <button
-        type="button"
-        class="gold-btn hero-button"
-        onclick="showSection('profile')"
-      >
-        MỞ THIỆP
-      </button>
+  <button
+    type="button"
+    class="gold-btn hero-button"
+    onclick="showSection('profile')"
+  >
+    MỞ THIỆP
+  </button>
 
-    </div>
+</div>
+```
 
   </section>
-
 
   <!-- =====================================
        THÔNG TIN CÁ NHÂN
@@ -424,106 +499,109 @@
 
   <section
     id="profile"
-    class="card profile-card hidden"
+    class="card hidden"
   >
 
-    <p class="eyebrow">
-      NGƯỜI TỐT NGHIỆP
-    </p>
+```
+<p class="eyebrow">
+  NGƯỜI TỐT NGHIỆP
+</p>
 
-    <h2>
-      Thông tin cá nhân
-    </h2>
-
-
-    <!-- ẢNH -->
-
-    <div class="profile-photo">
-
-      <img
-        src="img/graduation.jpg"
-        alt="Ảnh người tốt nghiệp"
-      >
-
-    </div>
+<h2>
+  Thông tin cá nhân
+</h2>
 
 
-    <!-- TÊN -->
+<div class="profile-photo">
 
-    <h3 class="profile-name">
-      VÕ TUẤN PHỤNG
-    </h3>
+  <img
+    src="img/graduation.jpg"
+    alt="Ảnh người tốt nghiệp"
+  >
 
-
-    <!-- THÔNG TIN -->
-
-    <div class="profile-info">
-
-      <div>
-        <span>🎓</span>
-
-        <div>
-          <b>Chuyên ngành</b>
-
-          <p>
-            Công nghệ thông tin
-          </p>
-        </div>
-      </div>
+</div>
 
 
-      <div>
-        <span>🏫</span>
-
-        <div>
-          <b>Trường</b>
-
-          <p>
-            Trường Đại học Giao Thông vận tải
-          </p>
-        </div>
-      </div>
+<h3 class="profile-name">
+  VÕ TUẤN PHỤNG
+</h3>
 
 
-      <div>
-        <span>📚</span>
+<div class="profile-info">
 
-        <div>
-          <b>Khóa</b>
+  <div>
 
-          <p>
-            K2022 – K2026
-          </p>
-        </div>
-      </div>
+    <span>🎓</span>
 
-    </div>
+    <div>
 
-
-    <!-- LỜI NHẮN -->
-
-    <div class="profile-message">
+      <b>Chuyên ngành</b>
 
       <p>
-        “Một chặng đường khép lại,
-        một hành trình mới bắt đầu.”
+        Công nghệ thông tin
       </p>
 
     </div>
 
+  </div>
 
-    <!-- TIẾP TỤC -->
 
-    <button
-      type="button"
-      class="gold-btn"
-      onclick="showSection('details')"
-    >
-      XEM THÔNG TIN BUỔI TIỆC
-    </button>
+  <div>
+
+    <span>🏫</span>
+
+    <div>
+
+      <b>Trường</b>
+
+      <p>
+        Trường Đại học Giao Thông vận tải
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div>
+
+    <span>📚</span>
+
+    <div>
+
+      <b>Khóa</b>
+
+      <p>
+        K2022 – K2026
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="profile-message">
+
+  <p>
+    “Một chặng đường khép lại,
+    một hành trình mới bắt đầu.”
+  </p>
+
+</div>
+
+
+<button
+  type="button"
+  class="gold-btn"
+  onclick="showSection('details')"
+>
+  XEM THÔNG TIN BUỔI TIỆC
+</button>
+```
 
   </section>
-
 
   <!-- =====================================
        THÔNG TIN BUỔI TIỆC
@@ -534,118 +612,122 @@
     class="card hidden"
   >
 
-    <p class="eyebrow">
-      THÔNG TIN BUỔI TIỆC
-    </p>
+```
+<p class="eyebrow">
+  THÔNG TIN BUỔI TIỆC
+</p>
 
-    <h2>
-      Tham Dự Lễ Tốt Nghiệp
-    </h2>
-
-
-    <div class="info graduation-date">
+<h2>
+  Tham Dự Lễ Tốt Nghiệp
+</h2>
 
 
-      <!-- NGÀY -->
+<div class="info graduation-date">
 
-      <div class="event-info-item">
 
-        <div class="item-icon">
-          📅
+  <!-- NGÀY -->
+
+  <div class="event-info-item">
+
+    <div class="item-icon">
+      📅
+    </div>
+
+    <div class="item-title">
+      NGÀY TỐT NGHIỆP
+    </div>
+
+    <div class="item-content">
+
+      <p class="calendar-date">
+        09 THÁNG 09, 2026
+      </p>
+
+      <p class="calendar-time">
+        08:30
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- COUNTDOWN -->
+
+  <div class="event-info-item countdown-box">
+
+    <div class="item-icon">
+      ⏳
+    </div>
+
+    <div class="item-title">
+      ĐẾM NGƯỢC ĐẾN NGÀY TỐT NGHIỆP
+    </div>
+
+    <div class="item-content">
+
+      <div
+        id="countdown"
+        class="countdown"
+      >
+
+        <div>
+          <strong id="days">00</strong>
+          <small>NGÀY</small>
         </div>
 
-        <div class="item-title">
-          NGÀY TỐT NGHIỆP
+        <div>
+          <strong id="hours">00</strong>
+          <small>GIỜ</small>
         </div>
 
-        <div class="item-content">
-
-          <p class="calendar-date">
-            09 THÁNG 09, 2026
-          </p>
-
-          <p class="calendar-time">
-            08:30
-          </p>
-
+        <div>
+          <strong id="minutes">00</strong>
+          <small>PHÚT</small>
         </div>
 
-      </div>
-
-
-      <!-- COUNTDOWN -->
-
-      <div class="event-info-item countdown-box">
-
-        <div class="item-icon">
-          ⏳
-        </div>
-
-        <div class="item-title">
-          ĐẾM NGƯỢC ĐẾN NGÀY TỐT NGHIỆP
-        </div>
-
-        <div class="item-content">
-
-          <div
-            id="countdown"
-            class="countdown"
-          >
-
-            <div>
-              <strong id="days">00</strong>
-              <small>NGÀY</small>
-            </div>
-
-            <div>
-              <strong id="hours">00</strong>
-              <small>GIỜ</small>
-            </div>
-
-            <div>
-              <strong id="minutes">00</strong>
-              <small>PHÚT</small>
-            </div>
-
-            <div>
-              <strong id="seconds">00</strong>
-              <small>GIÂY</small>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- ĐỊA ĐIỂM -->
-
-      <div class="event-info-item">
-
-        <div class="item-icon">
-          📍
-        </div>
-
-        <div class="item-title">
-          ĐỊA ĐIỂM
-        </div>
-
-        <div class="item-content">
-
-          <p class="location-title">
-            Trường Đại học Giao thông Vận tải
-          </p>
-
-          <p class="location-address">
-            Số 03 Cầu Giấy, Láng, Hà Nội
-          </p>
-
+        <div>
+          <strong id="seconds">00</strong>
+          <small>GIÂY</small>
         </div>
 
       </div>
 
     </div>
+
+  </div>
+
+
+  <!-- ĐỊA ĐIỂM -->
+
+  <div class="event-info-item">
+
+    <div class="item-icon">
+      📍
+    </div>
+
+    <div class="item-title">
+      ĐỊA ĐIỂM
+    </div>
+
+    <div class="item-content">
+
+      <p class="location-title">
+        Trường Đại học Giao thông Vận tải
+      </p>
+
+      <p class="location-address">
+        Số 03 Cầu Giấy, Láng, Hà Nội
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- KÉO XUỐNG GOOGLE MAP -->
 
 <a
   href="#map"
@@ -654,190 +736,252 @@
 >
   📍 XEM ĐỊA ĐIỂM
 </a>
+```
 
   </section>
 
+  <!-- =====================================
+       ĐỊA ĐIỂM
+       KHÔNG ẨN
+  ====================================== -->
+
+  <section
+    id="map"
+    class="card"
+  >
+
+```
+<p class="eyebrow">
+  ĐỊA ĐIỂM
+</p>
+
+<h2>
+  Trường Đại Học Giao Thông Vận Tải
+</h2>
+
+<p>
+  Số 03 Cầu Giấy, Láng, Hà Nội
+</p>
+
+
+<!-- GOOGLE MAPS -->
+
+<a
+  class="gold-btn link-btn"
+  href="https://www.google.com/maps/search/?api=1&query=Tr%C6%B0%E1%BB%9Dng%20%C4%90%E1%BA%A1i%20h%E1%BB%8Dc%20Giao%20th%C3%B4ng%20V%E1%BA%ADn%20t%E1%BA%A3i%2C%20S%E1%BB%91%2003%20C%E1%BA%A7u%20Gi%E1%BA%A5y%2C%20L%C3%A1ng%2C%20H%C3%A0%20N%E1%BB%99i"
+  target="_blank"
+  rel="noopener"
+>
+  📍 XEM GOOGLE MAPS
+</a>
+
+
+<!-- KÉO XUỐNG RSVP -->
+
+<button
+  type="button"
+  class="outline-btn"
+  onclick="document.getElementById('rsvp').scrollIntoView({
+    behavior:'smooth',
+    block:'start'
+  })"
+>
+  XÁC NHẬN THAM DỰ
+</button>
+```
+
+  </section>
 
   <!-- =====================================
        RSVP
+       KHÔNG ẨN
   ====================================== -->
 
   <section
     id="rsvp"
-    class="card hidden"
+    class="card"
   >
 
-    <p class="eyebrow">
-      XÁC NHẬN
-    </p>
+```
+<p class="eyebrow">
+  XÁC NHẬN
+</p>
 
-    <h2>
-      Bạn có tham dự không?
-    </h2>
-
-
-    <form
-      id="rsvpForm"
-      class="form"
-    >
-
-      <label>
-        Họ và tên
-        <span>*</span>
-      </label>
-
-      <input
-        id="rsvpName"
-        type="text"
-        required
-        placeholder="Nhập họ và tên"
-      >
+<h2>
+  Bạn có tham dự không?
+</h2>
 
 
-      <label>
-        Bạn có tham dự không?
-        <span>*</span>
-      </label>
+<form
+  id="rsvpForm"
+  class="form"
+>
 
-      <select
-        id="attendance"
-        required
-      >
+  <label>
+    Họ và tên
+    <span>*</span>
+  </label>
 
-        <option value="Có, tôi sẽ tham dự">
-          Có, tôi sẽ tham dự
-        </option>
-
-        <option value="Rất tiếc, tôi không thể tham dự">
-          Rất tiếc, tôi không thể tham dự
-        </option>
-
-      </select>
+  <input
+    id="rsvpName"
+    type="text"
+    required
+    placeholder="Nhập họ và tên"
+  >
 
 
-      <div id="questions"></div>
+  <label>
+    Bạn có tham dự không?
+    <span>*</span>
+  </label>
 
 
-      <button
-        id="rsvpSubmit"
-        type="submit"
-        class="outline-btn"
-      >
-        🎓 XÁC NHẬN THAM DỰ
-      </button>
+  <select
+    id="attendance"
+    required
+  >
 
-    </form>
+    <option value="Có, tôi sẽ tham dự">
+      Có, tôi sẽ tham dự
+    </option>
 
+    <option value="Rất tiếc, tôi không thể tham dự">
+      Rất tiếc, tôi không thể tham dự
+    </option>
 
-    <iframe
-      name="submitFrame"
-      id="submitFrame"
-      hidden
-    ></iframe>
+  </select>
 
 
-    <p
-      id="rsvpStatus"
-      class="status"
-    ></p>
+  <div id="questions"></div>
 
 
-    <div
-      id="wishButton"
-      class="hidden"
-    >
+  <button
+    id="rsvpSubmit"
+    type="submit"
+    class="outline-btn"
+  >
+    🎓 XÁC NHẬN THAM DỰ
+  </button>
 
-      <button
-        type="button"
-        class="gold-btn"
-        onclick="showSection('wish')"
-      >
-        💌 GỬI LỜI CHÚC
-      </button>
+</form>
 
-    </div>
+
+<iframe
+  name="submitFrame"
+  id="submitFrame"
+  hidden
+></iframe>
+
+
+<p
+  id="rsvpStatus"
+  class="status"
+></p>
+
+
+<!-- NÚT LỜI CHÚC -->
+
+<div
+  id="wishButton"
+  class="hidden"
+>
+
+  <button
+    type="button"
+    class="gold-btn"
+    onclick="showSection('wish')"
+  >
+    💌 GỬI LỜI CHÚC
+  </button>
+
+</div>
+```
 
   </section>
 
-
   <!-- =====================================
        LỜI CHÚC
+       VẪN ẨN CHO ĐẾN KHI RSVP
   ====================================== -->
 
   <section
     id="wish"
-    class="card hidden"
+    class="card"
   >
 
-    <p class="eyebrow">
-      LỜI CHÚC
-    </p>
+```
+<p class="eyebrow">
+  LỜI CHÚC
+</p>
 
-    <h2>
-      Gửi một lời chúc
-    </h2>
-
-
-    <form
-      id="wishForm"
-      class="form"
-    >
-
-      <label>
-        Họ và tên
-        <span>*</span>
-      </label>
-
-      <input
-        id="wishName"
-        type="text"
-        required
-        placeholder="Tên của bạn"
-      >
+<h2>
+  Gửi một lời chúc
+</h2>
 
 
-      <label>
-        Lời chúc
-        <span>*</span>
-      </label>
+<form
+  id="wishForm"
+  class="form"
+>
 
-      <textarea
-        id="wishText"
-        required
-        maxlength="500"
-        rows="6"
-        placeholder="Viết lời chúc của bạn..."
-      ></textarea>
+  <label>
+    Họ và tên
+    <span>*</span>
+  </label>
 
 
-      <button
-        id="wishSubmit"
-        class="gold-btn"
-        type="submit"
-      >
-        ♡ GỬI LỜI CHÚC
-      </button>
-
-    </form>
+  <input
+    id="wishName"
+    type="text"
+    required
+    placeholder="Tên của bạn"
+  >
 
 
-    <iframe
-      name="wishFrame"
-      id="wishFrame"
-      hidden
-    ></iframe>
+  <label>
+    Lời chúc
+    <span>*</span>
+  </label>
 
 
-    <p
-      id="wishStatus"
-      class="status"
-    ></p>
+  <textarea
+    id="wishText"
+    required
+    maxlength="500"
+    rows="6"
+    placeholder="Viết lời chúc của bạn..."
+  ></textarea>
+
+
+  <button
+    id="wishSubmit"
+    class="gold-btn"
+    type="submit"
+  >
+    ♡ GỬI LỜI CHÚC
+  </button>
+
+</form>
+
+
+<iframe
+  name="wishFrame"
+  id="wishFrame"
+  hidden
+></iframe>
+
+
+<p
+  id="wishStatus"
+  class="status"
+></p>
+```
 
   </section>
 
-
   <!-- =====================================
        CẢM ƠN
+       VẪN ẨN
   ====================================== -->
 
   <section
@@ -845,25 +989,26 @@
     class="card wishes hidden"
   >
 
-    <p class="eyebrow">
-      💖 LỜI CẢM ƠN
-    </p>
+```
+<p class="eyebrow">
+  💖 LỜI CẢM ƠN
+</p>
 
-    <h2>
-      Cảm ơn bạn đã gửi lời chúc
-    </h2>
+<h2>
+  Cảm ơn bạn đã gửi lời chúc
+</h2>
 
 
-    <div id="wishList">
+<div id="wishList">
 
-      <p class="muted">
-        Cảm ơn bạn đã dành những lời chúc tốt đẹp.
-      </p>
+  <p class="muted">
+    Cảm ơn bạn đã dành những lời chúc tốt đẹp.
+  </p>
 
-    </div>
+</div>
+```
 
   </section>
-
 
   <!-- =====================================
        FOOTER
@@ -871,11 +1016,12 @@
 
   <footer>
 
-    🎓 Cảm ơn bạn đã góp phần làm nên
-    một ngày thật ý nghĩa.
+```
+🎓 Cảm ơn bạn đã góp phần làm nên
+một ngày thật ý nghĩa.
+```
 
   </footer>
-
 
 </main>
 
