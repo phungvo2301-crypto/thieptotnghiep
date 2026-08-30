@@ -1136,3 +1136,230 @@ footer {
   }
 
 }
+
+
+/* =========================================
+   LỊCH TỐT NGHIỆP + COUNTDOWN
+========================================= */
+
+.graduation-date {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+  margin: 28px 0;
+}
+
+
+/* =========================================
+   KHUNG LỊCH
+========================================= */
+
+.calendar-box,
+.countdown-box {
+
+  padding: 24px 18px;
+
+  text-align: center;
+
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f4fbff
+    );
+
+  border: 1px solid
+    rgba(58, 167, 232, 0.15);
+
+}
+
+
+/* Icon */
+
+.calendar-icon,
+.countdown-icon {
+
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 34px;
+
+}
+
+
+/* Tiêu đề */
+
+.calendar-box b,
+.countdown-box b {
+
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: var(--blue-dark);
+
+  font-size: 15px;
+
+  letter-spacing: 1px;
+
+}
+
+
+/* =========================================
+   NGÀY
+========================================= */
+
+.calendar-date {
+
+  margin: 4px 0;
+
+  color: #263b4d;
+
+  font-size: 25px !important;
+
+  font-weight: bold;
+
+}
+
+
+.calendar-time {
+
+  margin: 0;
+
+  color: var(--blue-dark) !important;
+
+  font-size: 22px !important;
+
+  font-weight: bold;
+
+}
+
+
+/* =========================================
+   COUNTDOWN
+========================================= */
+
+.countdown {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 8px;
+
+  margin-top: 15px;
+
+}
+
+
+.countdown > div {
+
+  padding: 12px 5px;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #eaf7ff
+    );
+
+  border: 1px solid
+    rgba(58, 167, 232, 0.12);
+
+}
+
+
+.countdown strong {
+
+  display: block;
+
+  color: var(--blue-dark);
+
+  font-size: 25px;
+
+  line-height: 1.1;
+
+}
+
+
+.countdown small {
+
+  display: block;
+
+  margin-top: 5px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+  font-weight: bold;
+
+}
+
+
+/* =========================================
+   KHI ĐÃ ĐẾN NGÀY
+========================================= */
+
+.countdown-finished {
+
+  padding: 15px;
+
+  color: var(--blue-dark);
+
+  font-size: 20px;
+
+  font-weight: bold;
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .calendar-date {
+
+    font-size: 22px !important;
+
+  }
+
+  .calendar-time {
+
+    font-size: 20px !important;
+
+  }
+
+  .countdown {
+
+    gap: 5px;
+
+  }
+
+  .countdown > div {
+
+    padding: 10px 3px;
+
+  }
+
+  .countdown strong {
+
+    font-size: 20px;
+
+  }
+
+  .countdown small {
+
+    font-size: 9px;
+
+  }
+
+}
