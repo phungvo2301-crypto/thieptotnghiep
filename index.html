@@ -6,10 +6,11 @@
 
   <meta charset="utf-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width,initial-scale=1"
-  >
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1"
+
+>
 
   <title>Lễ Tốt Nghiệp</title>
 
@@ -36,6 +37,44 @@
           behavior: "smooth",
           block: "start"
         });
+
+      }, 50);
+
+    }
+
+
+    /* =====================================
+       MỞ THÔNG TIN BUỔI TIỆC
+       VÀ HIỆN CÁC PHẦN PHÍA SAU
+       NHƯNG KHÔNG TỰ CUỘN
+    ===================================== */
+
+    function showDetails() {
+
+      const sections = [
+        "details",
+        "rsvp",
+        "wish"
+      ];
+
+      sections.forEach(id => {
+
+        const section =
+          document.getElementById(id);
+
+        if (section) {
+          section.classList.remove("hidden");
+        }
+
+      });
+
+      setTimeout(() => {
+
+        document.getElementById("details")
+          ?.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
 
       }, 50);
 
@@ -449,48 +488,48 @@
 
 <main class="site">
 
-
   <!-- =====================================
        TRANG BÌA
   ====================================== -->
 
   <section class="hero">
 
-    <div class="hero-overlay"></div>
+```
+<div class="hero-overlay"></div>
 
-    <img
-      src="img/graduation.jpg"
-      class="hero-img"
-      alt="Ảnh lễ tốt nghiệp"
-    >
+<img
+  src="img/graduation.jpg"
+  class="hero-img"
+  alt="Ảnh lễ tốt nghiệp"
+>
 
-    <div class="hero-content">
+<div class="hero-content">
 
-      <p class="eyebrow hero-eyebrow">
-        THƯ MỜI
-      </p>
+  <p class="eyebrow hero-eyebrow">
+    THƯ MỜI
+  </p>
 
-      <h1 class="hero-title">
-        LỄ<br>
-        TỐT NGHIỆP
-      </h1>
+  <h1 class="hero-title">
+    LỄ<br>
+    TỐT NGHIỆP
+  </h1>
 
-      <p class="hero-description">
-        Trân trọng kính mời bạn đến tham dự
-      </p>
+  <p class="hero-description">
+    Trân trọng kính mời bạn đến tham dự
+  </p>
 
-      <button
-        type="button"
-        class="gold-btn hero-button"
-        onclick="showSection('profile')"
-      >
-        MỞ THIỆP
-      </button>
+  <button
+    type="button"
+    class="gold-btn hero-button"
+    onclick="showSection('profile')"
+  >
+    MỞ THIỆP
+  </button>
 
-    </div>
+</div>
+```
 
   </section>
-
 
   <!-- =====================================
        THÔNG TIN CÁ NHÂN
@@ -501,105 +540,106 @@
     class="card hidden"
   >
 
-    <p class="eyebrow">
-      NGƯỜI TỐT NGHIỆP
-    </p>
+```
+<p class="eyebrow">
+  NGƯỜI TỐT NGHIỆP
+</p>
 
-    <h2>
-      Thông tin cá nhân
-    </h2>
-
-
-    <div class="profile-photo">
-
-      <img
-        src="img/graduation.jpg"
-        alt="Ảnh người tốt nghiệp"
-      >
-
-    </div>
+<h2>
+  Thông tin cá nhân
+</h2>
 
 
-    <h3 class="profile-name">
-      VÕ TUẤN PHỤNG
-    </h3>
+<div class="profile-photo">
+
+  <img
+    src="img/graduation.jpg"
+    alt="Ảnh người tốt nghiệp"
+  >
+
+</div>
 
 
-    <div class="profile-info">
-
-      <div>
-
-        <span>🎓</span>
-
-        <div>
-
-          <b>Chuyên ngành</b>
-
-          <p>
-            Công nghệ thông tin
-          </p>
-
-        </div>
-
-      </div>
+<h3 class="profile-name">
+  VÕ TUẤN PHỤNG
+</h3>
 
 
-      <div>
+<div class="profile-info">
 
-        <span>🏫</span>
+  <div>
 
-        <div>
+    <span>🎓</span>
 
-          <b>Trường</b>
+    <div>
 
-          <p>
-            Trường Đại học Giao Thông vận tải
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div>
-
-        <span>📚</span>
-
-        <div>
-
-          <b>Khóa</b>
-
-          <p>
-            K2022 – K2026
-          </p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="profile-message">
+      <b>Chuyên ngành</b>
 
       <p>
-        “Một chặng đường khép lại,
-        một hành trình mới bắt đầu.”
+        Công nghệ thông tin
       </p>
 
     </div>
 
+  </div>
 
-    <button
-      type="button"
-      class="gold-btn"
-      onclick="showSection('details'); showSection('rsvp'); showSection('wish')"
-    >
-      XEM THÔNG TIN BUỔI TIỆC
-    </button>
+
+  <div>
+
+    <span>🏫</span>
+
+    <div>
+
+      <b>Trường</b>
+
+      <p>
+        Trường Đại học Giao Thông vận tải
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div>
+
+    <span>📚</span>
+
+    <div>
+
+      <b>Khóa</b>
+
+      <p>
+        K2022 – K2026
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="profile-message">
+
+  <p>
+    “Một chặng đường khép lại,
+    một hành trình mới bắt đầu.”
+  </p>
+
+</div>
+
+
+<button
+  type="button"
+  class="gold-btn"
+  onclick="showDetails()"
+>
+  XEM THÔNG TIN BUỔI TIỆC
+</button>
+```
 
   </section>
-
 
   <!-- =====================================
        THÔNG TIN BUỔI TIỆC
@@ -610,138 +650,140 @@
     class="card hidden"
   >
 
-    <p class="eyebrow">
-      THÔNG TIN BUỔI TIỆC
-    </p>
+```
+<p class="eyebrow">
+  THÔNG TIN BUỔI TIỆC
+</p>
 
-    <h2>
-      Tham Dự Lễ Tốt Nghiệp
-    </h2>
-
-
-    <div class="info graduation-date">
+<h2>
+  Tham Dự Lễ Tốt Nghiệp
+</h2>
 
 
-      <!-- NGÀY -->
+<div class="info graduation-date">
 
-      <div class="event-info-item">
 
-        <div class="item-icon">
-          📅
+  <!-- NGÀY -->
+
+  <div class="event-info-item">
+
+    <div class="item-icon">
+      📅
+    </div>
+
+    <div class="item-title">
+      NGÀY TỐT NGHIỆP
+    </div>
+
+    <div class="item-content">
+
+      <p class="calendar-date">
+        09 THÁNG 09, 2026
+      </p>
+
+      <p class="calendar-time">
+        08:30
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- COUNTDOWN -->
+
+  <div class="event-info-item countdown-box">
+
+    <div class="item-icon">
+      ⏳
+    </div>
+
+    <div class="item-title">
+      ĐẾM NGƯỢC ĐẾN NGÀY TỐT NGHIỆP
+    </div>
+
+    <div class="item-content">
+
+      <div
+        id="countdown"
+        class="countdown"
+      >
+
+        <div>
+          <strong id="days">00</strong>
+          <small>NGÀY</small>
         </div>
 
-        <div class="item-title">
-          NGÀY TỐT NGHIỆP
+        <div>
+          <strong id="hours">00</strong>
+          <small>GIỜ</small>
         </div>
 
-        <div class="item-content">
-
-          <p class="calendar-date">
-            09 THÁNG 09, 2026
-          </p>
-
-          <p class="calendar-time">
-            08:30
-          </p>
-
+        <div>
+          <strong id="minutes">00</strong>
+          <small>PHÚT</small>
         </div>
 
-      </div>
-
-
-      <!-- COUNTDOWN -->
-
-      <div class="event-info-item countdown-box">
-
-        <div class="item-icon">
-          ⏳
-        </div>
-
-        <div class="item-title">
-          ĐẾM NGƯỢC ĐẾN NGÀY TỐT NGHIỆP
-        </div>
-
-        <div class="item-content">
-
-          <div
-            id="countdown"
-            class="countdown"
-          >
-
-            <div>
-              <strong id="days">00</strong>
-              <small>NGÀY</small>
-            </div>
-
-            <div>
-              <strong id="hours">00</strong>
-              <small>GIỜ</small>
-            </div>
-
-            <div>
-              <strong id="minutes">00</strong>
-              <small>PHÚT</small>
-            </div>
-
-            <div>
-              <strong id="seconds">00</strong>
-              <small>GIÂY</small>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- ĐỊA ĐIỂM -->
-
-      <div class="event-info-item">
-
-        <div class="item-icon">
-          📍
-        </div>
-
-        <div class="item-title">
-          ĐỊA ĐIỂM
-        </div>
-
-        <div class="item-content">
-
-          <p class="location-title">
-            Trường Đại học Giao thông Vận tải
-          </p>
-
-          <p class="location-address">
-            Số 03 Cầu Giấy, Láng, Hà Nội
-          </p>
-
+        <div>
+          <strong id="seconds">00</strong>
+          <small>GIÂY</small>
         </div>
 
       </div>
 
     </div>
 
+  </div>
 
-    <!-- GOOGLE MAP -->
 
-    <a
-      class="gold-btn link-btn"
-      href="https://www.google.com/maps/search/?api=1&query=Tr%C6%B0%E1%BB%9Dng%20%C4%90%E1%BA%A1i%20h%E1%BB%8Dc%20Giao%20th%C3%B4ng%20V%E1%BA%ADn%20t%E1%BA%A3i%2C%20S%E1%BB%91%2003%20C%E1%BA%A7u%20Gi%E1%BA%A5y%2C%20L%C3%A1ng%2C%20H%C3%A0%20N%E1%BB%99i"
-      target="_blank"
-      rel="noopener"
-    >
-      📍 XEM GOOGLE MAPS
-    </a>
+  <!-- ĐỊA ĐIỂM -->
+
+  <div class="event-info-item">
+
+    <div class="item-icon">
+      📍
+    </div>
+
+    <div class="item-title">
+      ĐỊA ĐIỂM
+    </div>
+
+    <div class="item-content">
+
+      <p class="location-title">
+        Trường Đại học Giao thông Vận tải
+      </p>
+
+      <p class="location-address">
+        Số 03 Cầu Giấy, Láng, Hà Nội
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- GOOGLE MAP -->
+
+<a
+  class="gold-btn link-btn"
+  href="https://www.google.com/maps/search/?api=1&query=Tr%C6%B0%E1%BB%9Dng%20%C4%90%E1%BA%A1i%20h%E1%BB%8Dc%20Giao%20th%C3%B4ng%20V%E1%BA%ADn%20t%E1%BA%A3i%2C%20S%E1%BB%91%2003%20C%E1%BA%A7u%20Gi%E1%BA%A5y%2C%20L%C3%A1ng%2C%20H%C3%A0%20N%E1%BB%99i"
+  target="_blank"
+  rel="noopener"
+>
+  📍 XEM GOOGLE MAPS
+</a>
+```
 
   </section>
 
-
   <!-- =====================================
        RSVP
-       ẨN CHO ĐẾN KHI NHẤN
-       XEM THÔNG TIN BUỔI TIỆC
+       ẨN BAN ĐẦU
+       SẼ HIỆN SAU KHI NHẤN
+       "XEM THÔNG TIN BUỔI TIỆC"
   ====================================== -->
 
   <section
@@ -749,106 +791,108 @@
     class="card hidden"
   >
 
-    <p class="eyebrow">
-      XÁC NHẬN
-    </p>
+```
+<p class="eyebrow">
+  XÁC NHẬN
+</p>
 
-    <h2>
-      Bạn có tham dự không?
-    </h2>
-
-
-    <form
-      id="rsvpForm"
-      class="form"
-    >
-
-      <label>
-        Họ và tên
-        <span>*</span>
-      </label>
-
-      <input
-        id="rsvpName"
-        type="text"
-        required
-        placeholder="Nhập họ và tên"
-      >
+<h2>
+  Bạn có tham dự không?
+</h2>
 
 
-      <label>
-        Bạn có tham dự không?
-        <span>*</span>
-      </label>
+<form
+  id="rsvpForm"
+  class="form"
+>
+
+  <label>
+    Họ và tên
+    <span>*</span>
+  </label>
+
+  <input
+    id="rsvpName"
+    type="text"
+    required
+    placeholder="Nhập họ và tên"
+  >
 
 
-      <select
-        id="attendance"
-        required
-      >
-
-        <option value="Có, tôi sẽ tham dự">
-          Có, tôi sẽ tham dự
-        </option>
-
-        <option value="Rất tiếc, tôi không thể tham dự">
-          Rất tiếc, tôi không thể tham dự
-        </option>
-
-      </select>
+  <label>
+    Bạn có tham dự không?
+    <span>*</span>
+  </label>
 
 
-      <div id="questions"></div>
+  <select
+    id="attendance"
+    required
+  >
+
+    <option value="Có, tôi sẽ tham dự">
+      Có, tôi sẽ tham dự
+    </option>
+
+    <option value="Rất tiếc, tôi không thể tham dự">
+      Rất tiếc, tôi không thể tham dự
+    </option>
+
+  </select>
 
 
-      <button
-        id="rsvpSubmit"
-        type="submit"
-        class="outline-btn"
-      >
-        🎓 XÁC NHẬN THAM DỰ
-      </button>
-
-    </form>
+  <div id="questions"></div>
 
 
-    <iframe
-      name="submitFrame"
-      id="submitFrame"
-      hidden
-    ></iframe>
+  <button
+    id="rsvpSubmit"
+    type="submit"
+    class="outline-btn"
+  >
+    🎓 XÁC NHẬN THAM DỰ
+  </button>
+
+</form>
 
 
-    <p
-      id="rsvpStatus"
-      class="status"
-    ></p>
+<iframe
+  name="submitFrame"
+  id="submitFrame"
+  hidden
+></iframe>
 
 
-    <!-- NÚT LỜI CHÚC -->
+<p
+  id="rsvpStatus"
+  class="status"
+></p>
 
-    <div
-      id="wishButton"
-      class="hidden"
-    >
 
-      <button
-        type="button"
-        class="gold-btn"
-        onclick="showSection('wish')"
-      >
-        💌 GỬI LỜI CHÚC
-      </button>
+<!-- NÚT LỜI CHÚC -->
 
-    </div>
+<div
+  id="wishButton"
+  class="hidden"
+>
+
+  <button
+    type="button"
+    class="gold-btn"
+    onclick="showSection('wish')"
+  >
+    💌 GỬI LỜI CHÚC
+  </button>
+
+</div>
+```
 
   </section>
 
-
   <!-- =====================================
        LỜI CHÚC
-       ẨN CHO ĐẾN KHI NHẤN
-       XEM THÔNG TIN BUỔI TIỆC
+       ẨN BAN ĐẦU
+       SẼ HIỆN SAU KHI NHẤN
+       "XEM THÔNG TIN BUỔI TIỆC"
   ====================================== -->
 
   <section
@@ -856,74 +900,75 @@
     class="card hidden"
   >
 
-    <p class="eyebrow">
-      LỜI CHÚC
-    </p>
+```
+<p class="eyebrow">
+  LỜI CHÚC
+</p>
 
-    <h2>
-      Gửi một lời chúc
-    </h2>
-
-
-    <form
-      id="wishForm"
-      class="form"
-    >
-
-      <label>
-        Họ và tên
-        <span>*</span>
-      </label>
+<h2>
+  Gửi một lời chúc
+</h2>
 
 
-      <input
-        id="wishName"
-        type="text"
-        required
-        placeholder="Tên của bạn"
-      >
+<form
+  id="wishForm"
+  class="form"
+>
+
+  <label>
+    Họ và tên
+    <span>*</span>
+  </label>
 
 
-      <label>
-        Lời chúc
-        <span>*</span>
-      </label>
+  <input
+    id="wishName"
+    type="text"
+    required
+    placeholder="Tên của bạn"
+  >
 
 
-      <textarea
-        id="wishText"
-        required
-        maxlength="500"
-        rows="6"
-        placeholder="Viết lời chúc của bạn..."
-      ></textarea>
+  <label>
+    Lời chúc
+    <span>*</span>
+  </label>
 
 
-      <button
-        id="wishSubmit"
-        class="gold-btn"
-        type="submit"
-      >
-        ♡ GỬI LỜI CHÚC
-      </button>
-
-    </form>
+  <textarea
+    id="wishText"
+    required
+    maxlength="500"
+    rows="6"
+    placeholder="Viết lời chúc của bạn..."
+  ></textarea>
 
 
-    <iframe
-      name="wishFrame"
-      id="wishFrame"
-      hidden
-    ></iframe>
+  <button
+    id="wishSubmit"
+    class="gold-btn"
+    type="submit"
+  >
+    ♡ GỬI LỜI CHÚC
+  </button>
+
+</form>
 
 
-    <p
-      id="wishStatus"
-      class="status"
-    ></p>
+<iframe
+  name="wishFrame"
+  id="wishFrame"
+  hidden
+></iframe>
+
+
+<p
+  id="wishStatus"
+  class="status"
+></p>
+```
 
   </section>
-
 
   <!-- =====================================
        CẢM ƠN
@@ -935,25 +980,26 @@
     class="card wishes hidden"
   >
 
-    <p class="eyebrow">
-      💖 LỜI CẢM ƠN
-    </p>
+```
+<p class="eyebrow">
+  💖 LỜI CẢM ƠN
+</p>
 
-    <h2>
-      Cảm ơn bạn đã gửi lời chúc
-    </h2>
+<h2>
+  Cảm ơn bạn đã gửi lời chúc
+</h2>
 
 
-    <div id="wishList">
+<div id="wishList">
 
-      <p class="muted">
-        Cảm ơn bạn đã dành những lời chúc tốt đẹp.
-      </p>
+  <p class="muted">
+    Cảm ơn bạn đã dành những lời chúc tốt đẹp.
+  </p>
 
-    </div>
+</div>
+```
 
   </section>
-
 
   <!-- =====================================
        FOOTER
@@ -961,11 +1007,12 @@
 
   <footer>
 
-    🎓 Cảm ơn bạn đã góp phần làm nên
-    một ngày thật ý nghĩa.
+```
+🎓 Cảm ơn bạn đã góp phần làm nên
+một ngày thật ý nghĩa.
+```
 
   </footer>
-
 
 </main>
 
