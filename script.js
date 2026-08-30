@@ -551,4 +551,20 @@ document.addEventListener(
 
   }
 );
-```
+// =========================================
+// MỞ THIỆP
+// =========================================
+
+function openInvitation() {
+
+  // Hiện thông tin cá nhân
+  showSection("profile");
+
+  // Sau đó hiện thông tin buổi tiệc
+  setTimeout(() => {
+
+    showSection("details");
+
+  }, 500);
+
+}
