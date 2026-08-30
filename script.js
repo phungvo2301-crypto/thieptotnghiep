@@ -16,17 +16,22 @@ const ENTRY_WISH = "entry.1647574086";
 // =============================
 
 function showSection(id) {
+
   const el = document.getElementById(id);
 
   if (el) {
+
     el.classList.remove("hidden");
 
     setTimeout(() => {
+
       el.scrollIntoView({
         behavior: "smooth",
         block: "start"
       });
+
     }, 30);
+
   }
 }
 
@@ -38,30 +43,42 @@ function showSection(id) {
 const QUESTIONS = [];
 
 function renderQuestions() {
-  const box = document.getElementById("questions");
+
+  const box =
+    document.getElementById("questions");
 
   if (!box) return;
 
   box.innerHTML = "";
 
   QUESTIONS.forEach((q, i) => {
-    const wrap = document.createElement("div");
+
+    const wrap =
+      document.createElement("div");
 
     wrap.className = "question";
 
     wrap.innerHTML = `
-      <label>${i + 1}. ${escapeHtml(q.text)}</label>
+      <label>
+        ${i + 1}. ${escapeHtml(q.text)}
+      </label>
+
       <input
         name="${escapeAttr(q.id)}"
-        placeholder="${escapeAttr(q.placeholder || "Nhập câu trả lời...")}"
+        placeholder="${escapeAttr(
+          q.placeholder || "Nhập câu trả lời..."
+        )}"
       >
     `;
 
     box.appendChild(wrap);
+
   });
 }
 
+
 function escapeHtml(s) {
+
   return String(s).replace(
     /[&<>"']/g,
     m => ({
@@ -72,7 +89,9 @@ function escapeHtml(s) {
       "'": "&#039;"
     }[m])
   );
+
 }
+
 
 function escapeAttr(s) {
   return escapeHtml(s);
@@ -80,154 +99,314 @@ function escapeAttr(s) {
 
 
 // =============================
-// GỬI RSVP VÀO GOOGLE FORM
+// GỬI RSVP
 // =============================
 
 function setupRSVP() {
 
-  const rsvp = document.getElementById("rsvpForm");
+  const rsvp =
+    document.getElementById("rsvpForm");
 
   if (!rsvp) return;
 
-  rsvp.addEventListener("submit", function(e) {
 
-    e.preventDefault();
+  rsvp.addEventListener(
+    "submit",
+    function(e) {
 
-    const nameInput =
-      rsvp.querySelector('input[name="name"]');
+      e.preventDefault();
 
-    const attendanceInput =
-      rsvp.querySelector('[name="attendance"]');
 
-    const status =
-      document.getElementById("rsvpStatus");
+      const nameInput =
+        rsvp.querySelector(
+          'input[name="name"]'
+        );
 
-    if (!nameInput || !attendanceInput) {
-      if (status) {
-        status.textContent =
-          "Không tìm thấy thông tin biểu mẫu.";
+      const attendanceInput =
+        rsvp.querySelector(
+          '[name="attendance"]'
+        );
+
+      const status =
+        document.getElementById(
+          "rsvpStatus"
+        );
+
+
+      if (!nameInput ||
+          !attendanceInput) {
+
+        if (status) {
+
+          status.textContent =
+            "Không tìm thấy thông tin biểu mẫu.";
+
+        }
+
+        return;
       }
 
-      return;
+
+      // Kiểm tra họ tên
+
+      if (!nameInput.value.trim()) {
+
+        nameInput.focus();
+
+        return;
+      }
+
+
+      // Kiểm tra tham dự
+
+      if (!attendanceInput.value) {
+
+        attendanceInput.focus();
+
+        return;
+      }
+
+
+      // Đổi tên field
+
+      nameInput.name =
+        ENTRY_NAME;
+
+      attendanceInput.name =
+        ENTRY_ATTENDANCE;
+
+
+      // Gửi Google Form
+
+      rsvp.action =
+        FORM_URL;
+
+      rsvp.method =
+        "POST";
+
+      rsvp.target =
+        "submitFrame";
+
+
+      rsvp.submit();
+
+
+      // Thông báo
+
+      if (status) {
+
+        status.textContent =
+          "Đã gửi. Cảm ơn bạn đã xác nhận!";
+
+      }
+
+
+      // Khôi phục
+
+      setTimeout(() => {
+
+        nameInput.name =
+          "name";
+
+        attendanceInput.name =
+          "attendance";
+
+      }, 500);
+
     }
+  );
 
-
-    // Kiểm tra dữ liệu
-    if (!nameInput.value.trim()) {
-      nameInput.focus();
-      return;
-    }
-
-    if (!attendanceInput.value) {
-      attendanceInput.focus();
-      return;
-    }
-
-
-    // Đổi tên field sang mã Google Form
-    nameInput.name = ENTRY_NAME;
-    attendanceInput.name = ENTRY_ATTENDANCE;
-
-
-    // Đổi nơi nhận dữ liệu
-    rsvp.action = FORM_URL;
-    rsvp.method = "POST";
-    rsvp.target = "submitFrame";
-
-
-    // Gửi
-    rsvp.submit();
-
-
-    // Hiển thị thông báo trên thiệp
-    if (status) {
-      status.textContent =
-        "Đã gửi. Cảm ơn bạn đã xác nhận!";
-    }
-
-
-    // Trả lại tên field để có thể gửi lần nữa
-    setTimeout(() => {
-      nameInput.name = "name";
-      attendanceInput.name = "attendance";
-    }, 500);
-
-  });
 }
 
 
 // =============================
-// GỬI LỜI CHÚC VÀO GOOGLE FORM
+// GỬI LỜI CHÚC
 // =============================
 
 function setupWish() {
 
-  const wish = document.getElementById("wishForm");
+  const wish =
+    document.getElementById(
+      "wishForm"
+    );
 
   if (!wish) return;
 
-  wish.addEventListener("submit", function(e) {
 
-    e.preventDefault();
+  wish.addEventListener(
+    "submit",
+    function(e) {
 
-    const nameInput =
-      wish.querySelector('input[name="name"]');
+      e.preventDefault();
 
-    const wishInput =
-      wish.querySelector('textarea[name="wish"]');
 
-    const status =
-      document.getElementById("wishStatus");
+      const nameInput =
+        wish.querySelector(
+          'input[name="name"]'
+        );
 
-    if (!nameInput || !wishInput) {
-      if (status) {
-        status.textContent =
-          "Không tìm thấy thông tin biểu mẫu.";
+      const wishInput =
+        wish.querySelector(
+          'textarea[name="wish"]'
+        );
+
+      const status =
+        document.getElementById(
+          "wishStatus"
+        );
+
+      const thanks =
+        document.getElementById(
+          "wishThanks"
+        );
+
+
+      // =========================
+      // KIỂM TRA
+      // =========================
+
+      if (!nameInput ||
+          !wishInput) {
+
+        if (status) {
+
+          status.textContent =
+            "Không tìm thấy thông tin biểu mẫu.";
+
+        }
+
+        return;
       }
 
-      return;
+
+      // Kiểm tra họ tên
+
+      if (!nameInput.value.trim()) {
+
+        nameInput.focus();
+
+        return;
+      }
+
+
+      // Kiểm tra lời chúc
+
+      if (!wishInput.value.trim()) {
+
+        wishInput.focus();
+
+        return;
+      }
+
+
+      // =========================
+      // ĐỔI TÊN FIELD
+      // =========================
+
+      nameInput.name =
+        ENTRY_NAME;
+
+      wishInput.name =
+        ENTRY_WISH;
+
+
+      // =========================
+      // GỬI GOOGLE FORM
+      // =========================
+
+      wish.action =
+        FORM_URL;
+
+      wish.method =
+        "POST";
+
+      wish.target =
+        "wishFrame";
+
+
+      wish.submit();
+
+
+      // =========================
+      // THÔNG BÁO
+      // =========================
+
+      if (status) {
+
+        status.textContent =
+          "Đã gửi lời chúc. Xin cảm ơn!";
+
+      }
+
+
+      // =========================
+      // HIỆN PHẦN CẢM ƠN
+      // =========================
+
+      if (thanks) {
+
+        // Xóa trạng thái ẩn
+        thanks.classList.remove(
+          "hidden"
+        );
+
+
+        // Đảm bảo hiển thị
+        thanks.style.display =
+          "block";
+
+
+        // Cuộn tới phần cảm ơn
+        setTimeout(() => {
+
+          thanks.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+
+        }, 300);
+
+      }
+
+
+      // =========================
+      // ĐỔI NÚT
+      // =========================
+
+      const submitButton =
+        wish.querySelector(
+          'button[type="submit"]'
+        );
+
+
+      if (submitButton) {
+
+        submitButton.disabled =
+          true;
+
+        submitButton.textContent =
+          "✓ ĐÃ GỬI LỜI CHÚC";
+
+      }
+
+
+      // =========================
+      // KHÔI PHỤC FIELD
+      // =========================
+
+      setTimeout(() => {
+
+        nameInput.name =
+          "name";
+
+        wishInput.name =
+          "wish";
+
+      }, 500);
+
     }
+  );
 
-
-    // Kiểm tra
-    if (!nameInput.value.trim()) {
-      nameInput.focus();
-      return;
-    }
-
-    if (!wishInput.value.trim()) {
-      wishInput.focus();
-      return;
-    }
-
-
-    // Đổi sang mã Google Form
-    nameInput.name = ENTRY_NAME;
-    wishInput.name = ENTRY_WISH;
-
-
-    // Gửi tới Google Form
-    wish.action = FORM_URL;
-    wish.method = "POST";
-    wish.target = "wishFrame";
-
-    wish.submit();
-
-
-    // Thông báo
-    if (status) {
-      status.textContent =
-        "Đã gửi lời chúc. Xin cảm ơn!";
-    }
-
-
-    // Khôi phục
-    setTimeout(() => {
-      nameInput.name = "name";
-      wishInput.name = "wish";
-    }, 500);
-
-  });
 }
 
 
@@ -235,12 +414,15 @@ function setupWish() {
 // KHỞI ĐỘNG
 // =============================
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
 
-  renderQuestions();
+    renderQuestions();
 
-  setupRSVP();
+    setupRSVP();
 
-  setupWish();
+    setupWish();
 
-});
+  }
+);
