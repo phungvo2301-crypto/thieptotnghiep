@@ -18,10 +18,10 @@
     href="style.css"
   >
 
-  <!--
-    Hàm này được đặt trực tiếp trong index.html
-    để nút MỞ THIỆP luôn hoạt động.
-  -->
+
+  <!-- =====================================
+       XỬ LÝ HIỂN THỊ SECTION
+  ====================================== -->
 
   <script>
 
@@ -31,12 +31,6 @@
         document.getElementById(id);
 
       if (!section) {
-
-        console.error(
-          "Không tìm thấy section:",
-          id
-        );
-
         return;
       }
 
@@ -53,6 +47,505 @@
 
     }
 
+
+    // =====================================
+    // TRẠNG THÁI RSVP
+    // =====================================
+
+    let rsvpConfirmed = false;
+
+
+    // =====================================
+    // GOOGLE FORM
+    // =====================================
+
+    const FORM_URL =
+      "https://docs.google.com/forms/d/e/1FAIpQLSfT6gi-E1huEczB7JhNbfjz4yiuipkzO7otzDen4qcr_m8DSQ/formResponse";
+
+
+    const ENTRY_NAME =
+      "entry.2082199092";
+
+
+    const ENTRY_ATTENDANCE =
+      "entry.2081772106";
+
+
+    const ENTRY_WISH =
+      "entry.1647574086";
+
+
+    // =====================================
+    // KHI TRANG TẢI XONG
+    // =====================================
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+
+        // =================================
+        // FORM RSVP
+        // =================================
+
+        const rsvpForm =
+          document.getElementById(
+            "rsvpForm"
+          );
+
+
+        if (rsvpForm) {
+
+          rsvpForm.addEventListener(
+            "submit",
+            function (event) {
+
+              event.preventDefault();
+
+
+              const nameInput =
+                document.getElementById(
+                  "rsvpName"
+                );
+
+
+              const attendanceInput =
+                document.getElementById(
+                  "attendance"
+                );
+
+
+              const status =
+                document.getElementById(
+                  "rsvpStatus"
+                );
+
+
+              const wishButton =
+                document.getElementById(
+                  "wishButton"
+                );
+
+
+              const submitButton =
+                document.getElementById(
+                  "rsvpSubmit"
+                );
+
+
+              // ===========================
+              // KIỂM TRA HỌ TÊN
+              // ===========================
+
+              if (
+                !nameInput.value.trim()
+              ) {
+
+                nameInput.focus();
+
+                return;
+
+              }
+
+
+              // ===========================
+              // KIỂM TRA THAM DỰ
+              // ===========================
+
+              if (
+                !attendanceInput.value
+              ) {
+
+                attendanceInput.focus();
+
+                return;
+
+              }
+
+
+              // ===========================
+              // LẤY DỮ LIỆU
+              // ===========================
+
+              const name =
+                nameInput.value.trim();
+
+
+              const attendance =
+                attendanceInput.value;
+
+
+              // ===========================
+              // GỬI GOOGLE FORM
+              // ===========================
+
+              const tempForm =
+                document.createElement(
+                  "form"
+                );
+
+
+              tempForm.method =
+                "POST";
+
+
+              tempForm.action =
+                FORM_URL;
+
+
+              tempForm.target =
+                "submitFrame";
+
+
+              tempForm.style.display =
+                "none";
+
+
+              // Họ tên
+
+              const nameField =
+                document.createElement(
+                  "input"
+                );
+
+
+              nameField.type =
+                "hidden";
+
+
+              nameField.name =
+                ENTRY_NAME;
+
+
+              nameField.value =
+                name;
+
+
+              tempForm.appendChild(
+                nameField
+              );
+
+
+              // Tham dự
+
+              const attendanceField =
+                document.createElement(
+                  "input"
+                );
+
+
+              attendanceField.type =
+                "hidden";
+
+
+              attendanceField.name =
+                ENTRY_ATTENDANCE;
+
+
+              attendanceField.value =
+                attendance;
+
+
+              tempForm.appendChild(
+                attendanceField
+              );
+
+
+              document.body.appendChild(
+                tempForm
+              );
+
+
+              tempForm.submit();
+
+
+              // Xóa form tạm
+
+              setTimeout(function () {
+
+                tempForm.remove();
+
+              }, 1000);
+
+
+              // ===========================
+              // ĐÁNH DẤU ĐÃ XÁC NHẬN
+              // ===========================
+
+              rsvpConfirmed = true;
+
+
+              // ===========================
+              // THÔNG BÁO
+              // ===========================
+
+              status.textContent =
+                "✓ Đã xác nhận tham dự. Cảm ơn bạn!";
+
+
+              // ===========================
+              // HIỆN NÚT GỬI LỜI CHÚC
+              // ===========================
+
+              wishButton.classList.remove(
+                "hidden"
+              );
+
+
+              // ===========================
+              // KHÓA NÚT RSVP
+              // ===========================
+
+              submitButton.disabled =
+                true;
+
+
+              submitButton.textContent =
+                "✓ ĐÃ XÁC NHẬN";
+
+            }
+          );
+
+        }
+
+
+        // =================================
+        // FORM LỜI CHÚC
+        // =================================
+
+        const wishForm =
+          document.getElementById(
+            "wishForm"
+          );
+
+
+        if (wishForm) {
+
+          wishForm.addEventListener(
+            "submit",
+            function (event) {
+
+              event.preventDefault();
+
+
+              // =========================
+              // PHẢI RSVP TRƯỚC
+              // =========================
+
+              if (!rsvpConfirmed) {
+
+                return;
+
+              }
+
+
+              const nameInput =
+                document.getElementById(
+                  "wishName"
+                );
+
+
+              const wishInput =
+                document.getElementById(
+                  "wishText"
+                );
+
+
+              const status =
+                document.getElementById(
+                  "wishStatus"
+                );
+
+
+              const thanks =
+                document.getElementById(
+                  "wishThanks"
+                );
+
+
+              const submitButton =
+                document.getElementById(
+                  "wishSubmit"
+                );
+
+
+              // =========================
+              // KIỂM TRA
+              // =========================
+
+              if (
+                !nameInput.value.trim()
+              ) {
+
+                nameInput.focus();
+
+                return;
+
+              }
+
+
+              if (
+                !wishInput.value.trim()
+              ) {
+
+                wishInput.focus();
+
+                return;
+
+              }
+
+
+              // =========================
+              // LẤY DỮ LIỆU
+              // =========================
+
+              const name =
+                nameInput.value.trim();
+
+
+              const wish =
+                wishInput.value.trim();
+
+
+              // =========================
+              // GỬI GOOGLE FORM
+              // =========================
+
+              const tempForm =
+                document.createElement(
+                  "form"
+                );
+
+
+              tempForm.method =
+                "POST";
+
+
+              tempForm.action =
+                FORM_URL;
+
+
+              tempForm.target =
+                "wishFrame";
+
+
+              tempForm.style.display =
+                "none";
+
+
+              // Tên
+
+              const nameField =
+                document.createElement(
+                  "input"
+                );
+
+
+              nameField.type =
+                "hidden";
+
+
+              nameField.name =
+                ENTRY_NAME;
+
+
+              nameField.value =
+                name;
+
+
+              tempForm.appendChild(
+                nameField
+              );
+
+
+              // Lời chúc
+
+              const wishField =
+                document.createElement(
+                  "input"
+                );
+
+
+              wishField.type =
+                "hidden";
+
+
+              wishField.name =
+                ENTRY_WISH;
+
+
+              wishField.value =
+                wish;
+
+
+              tempForm.appendChild(
+                wishField
+              );
+
+
+              document.body.appendChild(
+                tempForm
+              );
+
+
+              tempForm.submit();
+
+
+              // Xóa form tạm
+
+              setTimeout(function () {
+
+                tempForm.remove();
+
+              }, 1000);
+
+
+              // =========================
+              // THÔNG BÁO
+              // =========================
+
+              status.textContent =
+                "✓ Đã gửi lời chúc. Xin cảm ơn!";
+
+
+              // =========================
+              // KHÓA NÚT
+              // =========================
+
+              submitButton.disabled =
+                true;
+
+
+              submitButton.textContent =
+                "✓ ĐÃ GỬI LỜI CHÚC";
+
+
+              // =========================
+              // HIỆN CẢM ƠN
+              // =========================
+
+              thanks.classList.remove(
+                "hidden"
+              );
+
+
+              setTimeout(function () {
+
+                thanks.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start"
+                });
+
+              }, 300);
+
+            }
+          );
+
+        }
+
+      }
+    );
+
   </script>
 
 </head>
@@ -64,7 +557,7 @@
 
 
   <!-- =====================================
-       HERO
+       TRANG BÌA
   ====================================== -->
 
   <section class="hero">
@@ -103,6 +596,7 @@
     </div>
 
   </section>
+
 
 
   <!-- =====================================
@@ -183,8 +677,9 @@
   </section>
 
 
+
   <!-- =====================================
-       MAP
+       ĐỊA ĐIỂM
   ====================================== -->
 
   <section
@@ -226,6 +721,7 @@
   </section>
 
 
+
   <!-- =====================================
        RSVP
   ====================================== -->
@@ -247,18 +743,7 @@
     <form
       id="rsvpForm"
       class="form"
-      method="POST"
-      target="submitFrame"
     >
-
-      <input
-        type="hidden"
-        name="type"
-        value="rsvp"
-      >
-
-
-      <!-- HỌ TÊN -->
 
       <label>
         Họ và tên
@@ -266,22 +751,20 @@
       </label>
 
       <input
+        id="rsvpName"
         type="text"
-        name="name"
         required
         placeholder="Nhập họ và tên"
       >
 
-
-      <!-- THAM DỰ -->
 
       <label>
         Bạn có tham dự không?
         <span>*</span>
       </label>
 
+
       <select
-        name="attendance"
         id="attendance"
         required
       >
@@ -301,14 +784,11 @@
       </select>
 
 
-      <!-- CÂU HỎI PHỤ -->
-
       <div id="questions"></div>
 
 
-      <!-- NÚT XÁC NHẬN -->
-
       <button
+        id="rsvpSubmit"
         type="submit"
         class="outline-btn"
       >
@@ -332,7 +812,7 @@
 
 
     <!-- =================================
-         NÚT GỬI LỜI CHÚC
+         NÚT LỜI CHÚC
 
          ẨN BAN ĐẦU
     ================================== -->
@@ -355,8 +835,11 @@
   </section>
 
 
+
   <!-- =====================================
-       WISH
+       LỜI CHÚC
+
+       ẨN BAN ĐẦU
   ====================================== -->
 
   <section
@@ -376,41 +859,30 @@
     <form
       id="wishForm"
       class="form"
-      method="POST"
-      target="wishFrame"
     >
-
-      <input
-        type="hidden"
-        name="type"
-        value="wish"
-      >
-
-
-      <!-- TÊN -->
 
       <label>
         Họ và tên
         <span>*</span>
       </label>
 
+
       <input
+        id="wishName"
         type="text"
-        name="name"
         required
         placeholder="Tên của bạn"
       >
 
-
-      <!-- LỜI CHÚC -->
 
       <label>
         Lời chúc
         <span>*</span>
       </label>
 
+
       <textarea
-        name="wish"
+        id="wishText"
         required
         maxlength="500"
         rows="6"
@@ -419,6 +891,7 @@
 
 
       <button
+        id="wishSubmit"
         class="gold-btn"
         type="submit"
       >
@@ -443,6 +916,7 @@
   </section>
 
 
+
   <!-- =====================================
        CẢM ƠN
   ====================================== -->
@@ -460,6 +934,7 @@
       Cảm ơn bạn đã gửi lời chúc
     </h2>
 
+
     <div id="wishList">
 
       <p class="muted">
@@ -469,6 +944,7 @@
     </div>
 
   </section>
+
 
 
   <!-- =====================================
@@ -484,13 +960,6 @@
 
 
 </main>
-
-
-<!-- =====================================
-     JAVASCRIPT
-====================================== -->
-
-<script src="script.js"></script>
 
 </body>
 
