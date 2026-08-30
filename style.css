@@ -2429,3 +2429,45 @@ h2 {
   font-size: 0.95rem !important;
   line-height: 1.4 !important;
 }
+/* 1. Tăng khoảng cách giữa các KHỐI MỤC LỚN (Ngày, Đếm ngược, Địa điểm) */
+.event-info-item {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  margin-bottom: 36px !important; /* Tăng khoảng cách giữa các mục lớn (cũ là 24px) */
+  padding: 12px 0 !important;      /* Tạo thêm khoảng trống đệm trên dưới */
+  box-sizing: border-box !important;
+}
+
+/* 2. Khoảng cách dưới Icon */
+.item-icon {
+  font-size: 1.8rem !important;
+  margin-bottom: 10px !important; /* Tạo khoảng trống giữa icon và tiêu đề */
+  display: block !important;
+}
+
+/* 3. Khoảng cách dưới Tiêu đề */
+.item-title {
+  width: 100% !important;
+  font-weight: bold !important;
+  font-size: 0.95rem !important;
+  color: #1a365d;
+  text-transform: uppercase !important;
+  margin-bottom: 14px !important; /* Tạo khoảng trống rõ ràng giữa tiêu đề và nội dung */
+  white-space: normal !important;
+  word-break: keep-all !important;
+  display: block !important;
+}
+
+/* 4. Khoảng cách giữa các DÒNG NỘI DUNG bên trong (Tên trường, Địa chỉ) */
+.item-content p {
+  width: 100% !important;
+  margin: 6px 0 !important;      /* Tăng khoảng cách giữa dòng tên trường và dòng địa chỉ */
+  white-space: normal !important;
+  word-break: keep-all !important;
+  overflow-wrap: break-word !important;
+  font-size: 1rem !important;
+  line-height: 1.6 !important;     /* Tăng chiều cao dòng giúp chữ thoáng hơn */
+}
