@@ -986,3 +986,153 @@ footer {
   }
 
 }
+```css
+/* =========================================
+   HIỆU ỨNG TRANG BÌA
+========================================= */
+
+/*
+   Ban đầu toàn bộ nội dung chữ và nút
+   được ẩn đi.
+*/
+
+.hero-content {
+  opacity: 1;
+}
+
+
+/* =========================================
+   THƯ MỜI
+========================================= */
+
+.hero-eyebrow {
+  opacity: 0;
+
+  transform: translateY(20px);
+
+  animation:
+    heroFadeUp 1s ease forwards;
+
+  animation-delay: 0.8s;
+}
+
+
+/* =========================================
+   TIÊU ĐỀ
+========================================= */
+
+.hero-title {
+  opacity: 0;
+
+  transform: translateY(25px);
+
+  animation:
+    heroFadeUp 1.2s ease forwards;
+
+  animation-delay: 1.4s;
+}
+
+
+/* =========================================
+   CÂU GIỚI THIỆU
+========================================= */
+
+.hero-description {
+  opacity: 0;
+
+  transform: translateY(20px);
+
+  animation:
+    heroFadeUp 1s ease forwards;
+
+  animation-delay: 2.1s;
+}
+
+
+/* =========================================
+   NÚT MỞ THIỆP
+========================================= */
+
+.hero-button {
+  opacity: 0;
+
+  transform:
+    translateY(20px)
+    scale(0.95);
+
+  animation:
+    heroButtonAppear 1s ease forwards;
+
+  animation-delay: 2.8s;
+}
+
+
+/* =========================================
+   ANIMATION CHUNG
+========================================= */
+
+@keyframes heroFadeUp {
+
+  0% {
+
+    opacity: 0;
+
+    transform:
+      translateY(25px);
+
+  }
+
+  100% {
+
+    opacity: 1;
+
+    transform:
+      translateY(0);
+
+  }
+
+}
+
+
+/* =========================================
+   ANIMATION NÚT
+========================================= */
+
+@keyframes heroButtonAppear {
+
+  0% {
+
+    opacity: 0;
+
+    transform:
+      translateY(25px)
+      scale(0.95);
+
+  }
+
+  100% {
+
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+
+  }
+
+}
+.hero-img {
+  animation: heroImageZoom 8s ease-out forwards;
+}
+
+@keyframes heroImageZoom {
+
+  from {
+    transform: scale(1.03);
+  }
+
+  to {
+    transform: scale(1.08);
+  }
+
+}
