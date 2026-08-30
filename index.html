@@ -54,12 +54,19 @@
           <option value="Rất tiếc, tôi không thể tham dự">Rất tiếc, tôi không thể tham dự</option>
         </select>
 
-        <label>Số người tham dự</label>
-        <input name="guests" type="number" min="1" max="20" value="1">
-
         <div id="questions"></div>
 
-        <button class="gold-btn" type="submit">✉ GỬI XÁC NHẬN</button>
+<button
+  class="outline-btn"
+  onclick="showSection('rsvp')">
+  🎓 XÁC NHẬN THAM DỰ
+</button>
+
+<button
+  class="gold-btn"
+  onclick="showSection('wish')">
+  💌 GỬI LỜI CHÚC
+</button>
       </form>
       <iframe name="submitFrame" id="submitFrame" hidden></iframe>
       <p id="rsvpStatus" class="status"></p>
