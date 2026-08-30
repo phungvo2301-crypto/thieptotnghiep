@@ -544,7 +544,131 @@
 
       }
     );
+// =====================================
+// BỘ ĐẾM NGƯỢC LỄ TỐT NGHIỆP
+// =====================================
 
+const graduationDate =
+  new Date(
+    "2026-09-09T08:30:00+07:00"
+  ).getTime();
+
+
+function updateCountdown() {
+
+  const now =
+    new Date().getTime();
+
+
+  const distance =
+    graduationDate - now;
+
+
+  const countdown =
+    document.getElementById(
+      "countdown"
+    );
+
+
+  if (!countdown) return;
+
+
+  // =================================
+  // ĐÃ ĐẾN NGÀY
+  // =================================
+
+  if (distance <= 0) {
+
+    countdown.innerHTML = `
+      <div
+        class="countdown-finished"
+        style="grid-column: 1 / -1;"
+      >
+        🎓 HÔM NAY LÀ NGÀY TỐT NGHIỆP!
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  // =================================
+  // TÍNH THỜI GIAN
+  // =================================
+
+  const days =
+    Math.floor(
+      distance /
+      (1000 * 60 * 60 * 24)
+    );
+
+
+  const hours =
+    Math.floor(
+      (distance %
+        (1000 * 60 * 60 * 24)) /
+        (1000 * 60 * 60)
+    );
+
+
+  const minutes =
+    Math.floor(
+      (distance %
+        (1000 * 60 * 60)) /
+        (1000 * 60)
+    );
+
+
+  const seconds =
+    Math.floor(
+      (distance %
+        (1000 * 60)) /
+        1000
+    );
+
+
+  // =================================
+  // HIỂN THỊ
+  // =================================
+
+  document.getElementById(
+    "days"
+  ).textContent =
+    String(days).padStart(2, "0");
+
+
+  document.getElementById(
+    "hours"
+  ).textContent =
+    String(hours).padStart(2, "0");
+
+
+  document.getElementById(
+    "minutes"
+  ).textContent =
+    String(minutes).padStart(2, "0");
+
+
+  document.getElementById(
+    "seconds"
+  ).textContent =
+    String(seconds).padStart(2, "0");
+
+}
+
+
+// Chạy ngay lập tức
+
+updateCountdown();
+
+
+// Cập nhật mỗi giây
+
+setInterval(
+  updateCountdown,
+  1000
+);
   </script>
 
 </head>
